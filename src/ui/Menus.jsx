@@ -1,6 +1,10 @@
+import { createContext, useState, useContext, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { HiEllipsisVertical } from "react-icons/hi2";
 import styled from "styled-components";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
-const StyledMenu = styled.div`
+const Menu = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -60,3 +64,104 @@ const StyledButton = styled.button`
     transition: all 0.3s;
   }
 `;
+
+// Making this a compound component
+
+// 1. Create a context
+// 2. Create a Parent component
+// 3. Create Child components
+// 4. Make the Child components an attribute of the Parent component
+
+// 1. Create a context
+const MenusContext = createContext();
+
+// 2. Create a Parent component
+function Menus({ children }) {
+  const [openId, setOpenId] = useState("");
+  const [position, setPosition] = useState(null);
+  const close = () => setOpenId("");
+  const open = setOpenId;
+
+  useEffect(
+    function () {
+      // Close the menu when the user scrolls
+      function handleScroll() {
+        close();
+      }
+
+      if (openId) {
+        window.addEventListener("scroll", handleScroll, true);
+      }
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll, true);
+      };
+    },
+    [openId]
+  );
+
+  return (
+    <MenusContext.Provider
+      value={{ openId, close, open, position, setPosition }}
+    >
+      {children}
+    </MenusContext.Provider>
+  );
+}
+
+// 3. Create Child components
+function Toggle({ id }) {
+  const { openId, close, open, setPosition } = useContext(MenusContext);
+
+  function handleClick(e) {
+    const rect = e.target.closest("button").getBoundingClientRect();
+    console.log(rect);
+    setPosition({
+      x: window.innerWidth - rect.width - rect.x,
+      y: rect.y + rect.height + 8,
+    });
+    openId === "" || openId !== id ? open(id) : close();
+  }
+
+  return (
+    <StyledToggle onClick={handleClick}>
+      <HiEllipsisVertical />
+    </StyledToggle>
+  );
+}
+function List({ id, children }) {
+  const { openId, position, close } = useContext(MenusContext);
+  const ref = useOutsideClick(close);
+
+  if (openId !== id) return null;
+  return createPortal(
+    <StyledList position={position} ref={ref}>
+      {children}
+    </StyledList>,
+    document.body
+  );
+}
+function Button({ children, icon, onClick }) {
+  const { close } = useContext(MenusContext);
+
+  function handleClick() {
+    onClick?.();
+    close();
+  }
+  return (
+    <li>
+      <StyledButton onClick={handleClick}>
+        {icon}
+        <span>{children}</span>
+      </StyledButton>
+    </li>
+  );
+}
+
+// 4. Make the Child components an attribute of the Parent component
+Menus.Menu = Menu; // Styled Component
+Menus.Toggle = Toggle;
+Menus.List = List;
+Menus.Button = Button;
+
+export default Menus;
