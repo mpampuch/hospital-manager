@@ -1,3 +1,4 @@
 Cabins: Rooms
 Guests: Patients
 Price: Cost
+hasBreakfast: hasInsurance
