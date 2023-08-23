@@ -2,3 +2,5 @@ Cabins: Rooms
 Guests: Patients
 Price: Cost
 hasBreakfast: hasInsurance
+National ID: Health Card Number
+Observervations: Patient Notes
