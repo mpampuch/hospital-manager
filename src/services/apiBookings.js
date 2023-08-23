@@ -3,7 +3,6 @@ import supabase from "./supabase";
 import { PAGE_SIZE } from "../utils/constants";
 
 export async function getBookings({ filter, sortBy, page }) {
-  console.log("RUNNING GET BOOKINGS FUNCTION");
   let query = supabase
     .from("bookings")
     .select(
