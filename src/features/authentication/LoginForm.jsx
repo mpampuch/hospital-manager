@@ -17,8 +17,9 @@ function LoginForm() {
 
     login(
       { email, password },
+      // Uncomment this to clear the form after an unsuccessful login
       {
-        onSettled: () => {
+        onSuccess: () => {
           setEmail("");
           setPassword("");
         },
