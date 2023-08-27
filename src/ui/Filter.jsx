@@ -41,6 +41,11 @@ function Filter({ filterField, options }) {
 
   function handleClick(value) {
     searchParams.set(filterField, value);
+
+    // This is to reset the page number when the filter is changed to avoid showing an empty page when the user changes the filter
+    if (searchParams.get("page")) {
+      searchParams.set("page", 1);
+    }
     setSearchParams(searchParams);
   }
 
