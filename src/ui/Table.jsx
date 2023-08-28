@@ -60,30 +60,20 @@ const Empty = styled.p`
   margin: 2.4rem;
 `;
 
-// Making this a compound component
-
-// 1. Create a context
-// 2. Create a Parent component
-// 3. Create Child components
-// 4. Make the Child components an attribute of the Parent component
-
-// 1. Create a context
 const TableContext = createContext();
 
-// 2. Create a Parent component
-function Table({ children, columns }) {
+function Table({ columns, children }) {
   return (
     <TableContext.Provider value={{ columns }}>
-      <StyledTable>{children}</StyledTable>
+      <StyledTable role="table">{children}</StyledTable>
     </TableContext.Provider>
   );
 }
 
-// 3. Create Child components
 function Header({ children }) {
   const { columns } = useContext(TableContext);
   return (
-    <StyledHeader role="row" columns={columns}>
+    <StyledHeader role="row" columns={columns} as="header">
       {children}
     </StyledHeader>
   );
@@ -96,15 +86,16 @@ function Row({ children }) {
     </StyledRow>
   );
 }
+
 function Body({ data, render }) {
   if (!data.length) return <Empty>No data to show at the moment</Empty>;
+
   return <StyledBody>{data.map(render)}</StyledBody>;
 }
 
-// 4. Make the Child components an attribute of the Parent component
 Table.Header = Header;
-Table.Row = Row;
 Table.Body = Body;
-Table.Footer = Footer; // Footer can be a styled component because it contains no logic and will be the same everywhere
+Table.Row = Row;
+Table.Footer = Footer;
 
 export default Table;

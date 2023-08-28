@@ -9,11 +9,12 @@ function SortBy({ options }) {
     searchParams.set("sortBy", e.target.value);
     setSearchParams(searchParams);
   }
+
   return (
     <Select
       options={options}
-      value={sortBy}
       type="white"
+      value={sortBy}
       onChange={handleChange}
     />
   );

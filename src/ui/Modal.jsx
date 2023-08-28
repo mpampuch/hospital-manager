@@ -1,4 +1,3 @@
-import { tr } from "date-fns/locale";
 import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
@@ -54,10 +53,8 @@ const Button = styled.button`
   }
 `;
 
-// 1. Create Context
 const ModalContext = createContext();
 
-// 2. Create Parent Component
 function Modal({ children }) {
   const [openName, setOpenName] = useState("");
 
@@ -71,19 +68,16 @@ function Modal({ children }) {
   );
 }
 
-// 3. Create Children Components
 function Open({ children, opens: opensWindowName }) {
   const { open } = useContext(ModalContext);
 
-  return cloneElement(children, {
-    onClick: () => open(opensWindowName),
-  });
+  return cloneElement(children, { onClick: () => open(opensWindowName) });
 }
 
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
-  // Close modal window if the click is outside the modal window
   const ref = useOutsideClick(close);
+
   if (name !== openName) return null;
 
   return createPortal(
@@ -92,6 +86,7 @@ function Window({ children, name }) {
         <Button onClick={close}>
           <HiXMark />
         </Button>
+
         <div>{cloneElement(children, { onCloseModal: close })}</div>
       </StyledModal>
     </Overlay>,
@@ -99,7 +94,6 @@ function Window({ children, name }) {
   );
 }
 
-// 4. Add Children Components to Parent Component
 Modal.Open = Open;
 Modal.Window = Window;
 

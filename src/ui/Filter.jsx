@@ -37,15 +37,12 @@ const FilterButton = styled.button`
 
 function Filter({ filterField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentFilter = searchParams.get(filterField) || options[0].value;
+  const currentFilter = searchParams.get(filterField) || options.at(0).value;
 
   function handleClick(value) {
     searchParams.set(filterField, value);
+    if (searchParams.get("page")) searchParams.set("page", 1);
 
-    // This is to reset the page number when the filter is changed to avoid showing an empty page when the user changes the filter
-    if (searchParams.get("page")) {
-      searchParams.set("page", 1);
-    }
     setSearchParams(searchParams);
   }
 
@@ -54,9 +51,9 @@ function Filter({ filterField, options }) {
       {options.map((option) => (
         <FilterButton
           key={option.value}
-          active={String(currentFilter === option.value)}
-          disabled={currentFilter === option.value}
           onClick={() => handleClick(option.value)}
+          active={option.value === currentFilter}
+          disabled={option.value === currentFilter}
         >
           {option.label}
         </FilterButton>
