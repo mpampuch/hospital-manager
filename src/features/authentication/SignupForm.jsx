@@ -28,9 +28,7 @@ function SignupForm() {
           type="text"
           id="fullName"
           disabled={isLoading}
-          {...register("fullName", {
-            required: "This field is required",
-          })}
+          {...register("fullName", { required: "This field is required" })}
         />
       </FormRow>
 
@@ -61,7 +59,7 @@ function SignupForm() {
             required: "This field is required",
             minLength: {
               value: 8,
-              message: "Password must be at least 8 characters long",
+              message: "Password needs a minimum of 8 characters",
             },
           })}
         />
@@ -75,7 +73,7 @@ function SignupForm() {
           {...register("passwordConfirm", {
             required: "This field is required",
             validate: (value) =>
-              value === getValues().password || "Passwords do not match",
+              value === getValues().password || "Passwords need to match",
           })}
         />
       </FormRow>

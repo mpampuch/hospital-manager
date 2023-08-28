@@ -1,17 +1,21 @@
 import styled from "styled-components";
 import { format, isToday } from "date-fns";
-import { HiEye, HiTrash } from "react-icons/hi";
-import { formatCurrency } from "../../utils/helpers";
-import { formatDistanceFromNow } from "../../utils/helpers";
+import {
+  HiArrowDownOnSquare,
+  HiArrowUpOnSquare,
+  HiEye,
+  HiTrash,
+} from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 
 import Tag from "../../ui/Tag";
 import Table from "../../ui/Table";
-import Menus from "../../ui/Menus";
 import Modal from "../../ui/Modal";
+import Menus from "../../ui/Menus";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import { useNavigate } from "react-router-dom";
-import { HiArrowDownOnSquare } from "react-icons/hi2";
-import { HiArrowUpOnSquare } from "react-icons/hi2";
+
+import { formatCurrency } from "../../utils/helpers";
+import { formatDistanceFromNow } from "../../utils/helpers";
 import { useCheckout } from "../check-in-out/useCheckout";
 import { useDeleteBooking } from "./useDeleteBooking";
 
@@ -102,6 +106,7 @@ function BookingRow({
             >
               See details
             </Menus.Button>
+
             {status === "unconfirmed" && (
               <Menus.Button
                 icon={<HiArrowDownOnSquare />}
@@ -110,6 +115,7 @@ function BookingRow({
                 Check in
               </Menus.Button>
             )}
+
             {status === "checked-in" && (
               <Menus.Button
                 icon={<HiArrowUpOnSquare />}
@@ -121,17 +127,16 @@ function BookingRow({
             )}
 
             <Modal.Open opens="delete">
-              <Menus.Button icon={<HiTrash />}>Delete Booking</Menus.Button>
+              <Menus.Button icon={<HiTrash />}>Delete booking</Menus.Button>
             </Modal.Open>
           </Menus.List>
         </Menus.Menu>
+
         <Modal.Window name="delete">
           <ConfirmDelete
-            resourceName={"booking"}
+            resourceName="booking"
             disabled={isDeleting}
-            onConfirm={() => {
-              deleteBooking(bookingId);
-            }}
+            onConfirm={() => deleteBooking(bookingId)}
           />
         </Modal.Window>
       </Modal>
