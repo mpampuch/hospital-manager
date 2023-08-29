@@ -46,7 +46,7 @@ const Cost = styled.div`
 const SpecialEqupmentCost = styled.div`
   font-family: "Sono";
   font-weight: 500;
-  color: var(--color-green-700);
+  color: var(--color-red-700);
 `;
 
 function CabinRow({ ward }) {
