@@ -7,30 +7,35 @@ import { useSearchParams } from "react-router-dom";
 import Empty from "../../ui/Empty";
 
 function CabinTable() {
-  const { isLoading, cabins } = useCabins();
+  const { isLoading, wards } = useCabins();
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
-  if (!cabins.length) return <Empty resourceName="cabins" />;
+  if (!wards.length) return <Empty resourceName="wards" />;
 
   // 1) FILTER
-  const filterValue = searchParams.get("discount") || "all";
+  const filterValue = searchParams.get("special-equipment") || "all";
 
-  let filteredCabins;
-  if (filterValue === "all") filteredCabins = cabins;
-  if (filterValue === "no-discount")
-    filteredCabins = cabins.filter((cabin) => cabin.discount === 0);
-  if (filterValue === "with-discount")
-    filteredCabins = cabins.filter((cabin) => cabin.discount > 0);
+  let filteredWards;
+  if (filterValue === "all") filteredWards = wards;
+  if (filterValue === "no-special-equipment")
+    filteredWards = wards.filter((ward) => ward.specialEquipmentCost === 0);
+  if (filterValue === "with-special-equipment")
+    filteredWards = wards.filter((ward) => ward.specialEquipmentCost > 0);
 
   // 2) SORT
   const sortBy = searchParams.get("sortBy") || "startDate-asc";
   const [field, direction] = sortBy.split("-");
   const modifier = direction === "asc" ? 1 : -1;
-  const sortedCabins = filteredCabins.sort(
+  const sortedWards = filteredWards.sort(
     (a, b) => (a[field] - b[field]) * modifier
   );
 
+  // console.log(wards);
+  // console.log(filteredWards);
+  console.log(sortedWards);
+  // console.log(ward);
+  // console.log(ward.id);
   return (
     <Menus>
       <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
@@ -38,16 +43,16 @@ function CabinTable() {
           <div></div>
           <div>Cabin</div>
           <div>Capacity</div>
-          <div>Price</div>
-          <div>Discount</div>
+          <div>Daily Cost</div>
+          <div>Special Equipment Cost</div>
           <div></div>
         </Table.Header>
 
         <Table.Body
-          // data={cabins}
-          // data={filteredCabins}
-          data={sortedCabins}
-          render={(cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
+          // data={wards}
+          // data={filteredWards}
+          data={sortedWards}
+          render={(ward) => <CabinRow ward={ward} key={ward.id} />}
         />
       </Table>
     </Menus>

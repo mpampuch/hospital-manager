@@ -6,10 +6,10 @@ function AddCabin() {
   return (
     <div>
       <Modal>
-        <Modal.Open opens="cabin-form">
-          <Button>Add new cabin</Button>
+        <Modal.Open opens="ward-form">
+          <Button>Add new ward</Button>
         </Modal.Open>
-        <Modal.Window name="cabin-form">
+        <Modal.Window name="ward-form">
           <CreateCabinForm />
         </Modal.Window>
       </Modal>

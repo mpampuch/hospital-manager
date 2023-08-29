@@ -1,7 +1,11 @@
+Hotel: Hospital
+Breakfast price
 Cabin: Ward
 Cabins: Wards
 Guests: Patients
 Price: Daily Cost
+Amount: Estimated Costs
+Bookings: Appointments
 Discount: Special Equipment Cost
 Description For Website: Description of 
 Unconfirmed: Scheduled
@@ -11,3 +15,34 @@ Observervations: Patient Notes
 Sales: Costs
 Total Sales: Total Costs
 Extras Sales: Special Equipment Costs
+Breakfast included?: Special Equipment Required?
+
+
+// Booking information section:
+// Add a medical information page to booking / appointment information
+// Remove + 6 guests
+// Replace flag with icon for man or woman
+
+// Cabins table to Wards table 
+regularPrice: dailyCost
+discount: specialEquipmentCost
+
+// Guests table to Patients table, same but added the following columns
+    sex text null,
+    healthInsuranceNumber text null,
+    medicalHistory text null,
+    insuranceInfo text null,
+    emergencyContact text null,
+
+// Bookings table to Appointments table
+"hasBreakfast" boolean null -> "hasConsultation" boolean null,
+added
+    "hasInurance" boolean null,
+    "requiresSpecialEquipement" boolean null,
+observations text null -> (same but refactor this to patient notes in front end)
+"cabinId" bigint null -> "wardId" bigint null,
+"guestId" bigint null -> "patientId" bigint null,
+added     
+  "doctorId" bigint null,
+  constraint appointments_doctorId_fkey foreign key ("doctorId") references doctors (id)
+

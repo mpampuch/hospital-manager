@@ -49,26 +49,28 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
-function CabinRow({ cabin }) {
+function CabinRow({ ward }) {
+  console.log("cabins row");
+  console.log(ward);
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { isCreating, createCabin } = useCreateCabin();
 
   const {
-    id: cabinId,
+    id: wardId,
     name,
     maxCapacity,
-    regularPrice,
-    discount,
+    dailyCost,
+    specialEquipmentCost,
     image,
     description,
-  } = cabin;
+  } = ward;
 
   function handleDuplicate() {
     createCabin({
       name: `Copy of ${name}`,
       maxCapacity,
-      regularPrice,
-      discount,
+      dailyCost,
+      specialEquipmentCost,
       image,
       description,
     });
@@ -79,18 +81,18 @@ function CabinRow({ cabin }) {
       <Img src={image} />
       <Cabin>{name}</Cabin>
       <div>Fits up to {maxCapacity} guests</div>
-      <Price>{formatCurrency(regularPrice)}</Price>
-      {discount ? (
-        <Discount>{formatCurrency(discount)}</Discount>
+      <Price>{formatCurrency(dailyCost)}</Price>
+      {specialEquipmentCost ? (
+        <Discount>{formatCurrency(specialEquipmentCost)}</Discount>
       ) : (
         <span>&mdash;</span>
       )}
       <div>
         <Modal>
           <Menus.Menu>
-            <Menus.Toggle id={cabinId} />
+            <Menus.Toggle id={wardId} />
 
-            <Menus.List id={cabinId}>
+            <Menus.List id={wardId}>
               <Menus.Button
                 icon={<HiSquare2Stack />}
                 onClick={handleDuplicate}
@@ -109,14 +111,14 @@ function CabinRow({ cabin }) {
             </Menus.List>
 
             <Modal.Window name="edit">
-              <CreateCabinForm cabinToEdit={cabin} />
+              <CreateCabinForm cabinToEdit={ward} />
             </Modal.Window>
 
             <Modal.Window name="delete">
               <ConfirmDelete
                 resourceName="cabins"
                 disabled={isDeleting}
-                onConfirm={() => deleteCabin(cabinId)}
+                onConfirm={() => deleteCabin(wardId)}
               />
             </Modal.Window>
           </Menus.Menu>
