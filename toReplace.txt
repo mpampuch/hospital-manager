@@ -7,7 +7,7 @@ Price: Daily Cost
 Amount: Estimated Costs
 Bookings: Appointments
 Discount: Special Equipment Cost
-Description For Website: Description of 
+Description For Website: Details
 Unconfirmed: Scheduled
 hasBreakfast: hasInsurance
 National ID: Health Card Number

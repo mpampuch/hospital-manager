@@ -38,20 +38,18 @@ const Cabin = styled.div`
   font-family: "Sono";
 `;
 
-const Price = styled.div`
+const Cost = styled.div`
   font-family: "Sono";
   font-weight: 600;
 `;
 
-const Discount = styled.div`
+const SpecialEqupmentCost = styled.div`
   font-family: "Sono";
   font-weight: 500;
   color: var(--color-green-700);
 `;
 
 function CabinRow({ ward }) {
-  console.log("cabins row");
-  console.log(ward);
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { isCreating, createCabin } = useCreateCabin();
 
@@ -80,10 +78,14 @@ function CabinRow({ ward }) {
     <Table.Row>
       <Img src={image} />
       <Cabin>{name}</Cabin>
-      <div>Fits up to {maxCapacity} guests</div>
-      <Price>{formatCurrency(dailyCost)}</Price>
+      <div>
+        Fits up to {maxCapacity} {maxCapacity === 1 ? "patient" : "patients"}
+      </div>
+      <Cost>{formatCurrency(dailyCost)}</Cost>
       {specialEquipmentCost ? (
-        <Discount>{formatCurrency(specialEquipmentCost)}</Discount>
+        <SpecialEqupmentCost>
+          {formatCurrency(specialEquipmentCost)}
+        </SpecialEqupmentCost>
       ) : (
         <span>&mdash;</span>
       )}

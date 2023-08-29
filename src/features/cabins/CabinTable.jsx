@@ -31,17 +31,12 @@ function CabinTable() {
     (a, b) => (a[field] - b[field]) * modifier
   );
 
-  // console.log(wards);
-  // console.log(filteredWards);
-  console.log(sortedWards);
-  // console.log(ward);
-  // console.log(ward.id);
   return (
     <Menus>
-      <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+      <Table columns="0.6fr 1fr 1.6fr 1fr 1.4fr 0.2fr">
         <Table.Header>
           <div></div>
-          <div>Cabin</div>
+          <div>Ward</div>
           <div>Capacity</div>
           <div>Daily Cost</div>
           <div>Special Equipment Cost</div>
