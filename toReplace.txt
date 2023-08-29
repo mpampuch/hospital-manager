@@ -1,6 +1,13 @@
-Cabins: Rooms
+Cabin: Ward
+Cabins: Wards
 Guests: Patients
-Price: Cost
+Price: Daily Cost
+Discount: Special Equipment Cost
+Description For Website: Description of 
+Unconfirmed: Scheduled
 hasBreakfast: hasInsurance
 National ID: Health Card Number
 Observervations: Patient Notes
+Sales: Costs
+Total Sales: Total Costs
+Extras Sales: Special Equipment Costs
