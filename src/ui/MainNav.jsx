@@ -4,9 +4,9 @@ import {
   HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
   HiOutlineHome,
-  HiOutlineHomeModern,
   HiOutlineUsers,
 } from "react-icons/hi2";
+import { MdDomainAdd } from "react-icons/md";
 
 const NavList = styled.ul`
   display: flex;
@@ -71,8 +71,8 @@ function MainNav() {
         </li>
         <li>
           <StyledNavLink to="/cabins">
-            <HiOutlineHomeModern />
-            <span>Cabins</span>
+            <MdDomainAdd />
+            <span>Wards</span>
           </StyledNavLink>
         </li>
         <li>
