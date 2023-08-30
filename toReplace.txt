@@ -16,6 +16,9 @@ Sales: Costs
 Total Sales: Total Costs
 Extras Sales: Special Equipment Costs
 Breakfast included?: Special Equipment Required?
+checked-out: discharged
+checked-in: admitted
+unconfirmed: scheduled
 
 
 // Booking information section:
