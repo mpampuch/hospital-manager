@@ -64,7 +64,7 @@ function BookingRow({
 
   const navigate = useNavigate();
   const { checkout, isCheckingOut } = useCheckout();
-  const { deleteBooking, isDeleting } = useDeleteBooking();
+  const { deleteAppointment, isDeleting } = useDeleteBooking();
 
   const statusToTagName = {
     scheduled: "blue",
@@ -129,16 +129,16 @@ function BookingRow({
             )}
 
             <Modal.Open opens="delete">
-              <Menus.Button icon={<HiTrash />}>Delete booking</Menus.Button>
+              <Menus.Button icon={<HiTrash />}>Delete appointment</Menus.Button>
             </Modal.Open>
           </Menus.List>
         </Menus.Menu>
 
         <Modal.Window name="delete">
           <ConfirmDelete
-            resourceName="booking"
+            resourceName="appointment"
             disabled={isDeleting}
-            onConfirm={() => deleteBooking(appointmentId)}
+            onConfirm={() => deleteAppointment(appointmentId)}
           />
         </Modal.Window>
       </Modal>
