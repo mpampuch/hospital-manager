@@ -26,11 +26,12 @@ const Box = styled.div`
 
 function CheckinBooking() {
   const [confirmPaid, setConfirmPaid] = useState(false);
-  const [addBreakfast, setAddBreakfast] = useState(false);
-  const { booking, isLoading } = useBooking();
+  const [addConsultation, setAddConsultation] = useState(false);
+  const { appointment, isLoading } = useBooking();
+  console.log("appointment", appointment);
   const { settings, isLoading: isLoadingSettings } = useSettings();
 
-  useEffect(() => setConfirmPaid(booking?.isPaid ?? false), [booking]);
+  useEffect(() => setConfirmPaid(appointment?.isPaid ?? false), [appointment]);
 
   const moveBack = useMoveBack();
   const { checkin, isCheckingIn } = useCheckin();
@@ -38,54 +39,57 @@ function CheckinBooking() {
   if (isLoading || isLoadingSettings) return <Spinner />;
 
   const {
-    id: bookingId,
-    guests,
+    id: appointmentId,
+    patients,
     totalPrice,
     numGuests,
-    hasBreakfast,
+    hasConsultation,
     numNights,
-  } = booking;
+  } = appointment;
 
-  const optionalBreakfastPrice =
-    settings.breakfastPrice * numNights * numGuests;
+  const optionalConsultationPrice = settings.consultationPrice;
 
   function handleCheckin() {
     if (!confirmPaid) return;
 
-    if (addBreakfast) {
+    console.log("addConsultation", addConsultation);
+    if (addConsultation) {
       checkin({
-        bookingId,
-        breakfast: {
-          hasBreakfast: true,
-          extrasPrice: optionalBreakfastPrice,
-          totalPrice: totalPrice + optionalBreakfastPrice,
+        appointmentId,
+        consulation: {
+          hasConsultation: true,
+          extrasPrice: optionalConsultationPrice,
+          totalPrice: totalPrice + optionalConsultationPrice,
         },
       });
     } else {
-      checkin({ bookingId, breakfast: {} });
+      console.log("appointmentId", appointmentId);
+      checkin({ appointmentId, consulation: {} });
     }
   }
 
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Check in booking #{bookingId}</Heading>
+        <Heading as="h1">
+          Admit patient for appointment #{appointmentId}
+        </Heading>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
-      <BookingDataBox booking={booking} />
+      <BookingDataBox appointment={appointment} />
 
-      {!hasBreakfast && (
+      {!hasConsultation && (
         <Box>
           <Checkbox
-            checked={addBreakfast}
+            checked={addConsultation}
             onChange={() => {
-              setAddBreakfast((add) => !add);
+              setAddConsultation((add) => !add);
               setConfirmPaid(false);
             }}
             id="breakfast"
           >
-            Want to add breakfast for {formatCurrency(optionalBreakfastPrice)}?
+            Requires consultation? ({formatCurrency(optionalConsultationPrice)})
           </Checkbox>
         </Box>
       )}
@@ -97,20 +101,20 @@ function CheckinBooking() {
           disabled={confirmPaid || isCheckingIn}
           id="confirm"
         >
-          I confirm that {guests.fullName} has paid the total amount of{" "}
-          {!addBreakfast
+          I confirm that {patients.fullName} has paid the total amount of{" "}
+          {!addConsultation
             ? formatCurrency(totalPrice)
             : `${formatCurrency(
-                totalPrice + optionalBreakfastPrice
+                totalPrice + optionalConsultationPrice
               )} (${formatCurrency(totalPrice)} + ${formatCurrency(
-                optionalBreakfastPrice
+                optionalConsultationPrice
               )})`}
         </Checkbox>
       </Box>
 
       <ButtonGroup>
         <Button onClick={handleCheckin} disabled={!confirmPaid || isCheckingIn}>
-          Check in booking #{bookingId}
+          Admit {patients.fullName}
         </Button>
         <Button variation="secondary" onClick={moveBack}>
           Back

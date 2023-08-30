@@ -26,64 +26,65 @@ const HeadingGroup = styled.div`
 `;
 
 function BookingDetail() {
-  const { booking, isLoading } = useBooking();
+  const { appointment, isLoading } = useBooking();
+  console.log("appointment", appointment);
   const { checkout, isCheckingOut } = useCheckout();
-  const { deleteBooking, isDeleting } = useDeleteBooking();
+  const { deleteAppointment, isDeleting } = useDeleteBooking();
 
   const moveBack = useMoveBack();
   const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
-  if (!booking) return <Empty resourceName="booking" />;
+  if (!appointment) return <Empty resourceName="appointment" />;
 
-  const { status, id: bookingId } = booking;
+  const { status, id: appointmentId } = appointment;
 
   const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
+    scheduled: "blue",
+    admitted: "green",
+    discharged: "silver",
   };
 
   return (
     <>
       <Row type="horizontal">
         <HeadingGroup>
-          <Heading as="h1">Booking #{bookingId}</Heading>
+          <Heading as="h1">Appointment #{appointmentId}</Heading>
           <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
         </HeadingGroup>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
-      <BookingDataBox booking={booking} />
+      <BookingDataBox appointment={appointment} />
 
       <ButtonGroup>
-        {status === "unconfirmed" && (
-          <Button onClick={() => navigate(`/checkin/${bookingId}`)}>
-            Check in
+        {status === "scheduled" && (
+          <Button onClick={() => navigate(`/checkin/${appointmentId}`)}>
+            Admit
           </Button>
         )}
 
-        {status === "checked-in" && (
+        {status === "admitted" && (
           <Button
             icon={<HiArrowUpOnSquare />}
-            onClick={() => checkout(bookingId)}
+            onClick={() => checkout(appointmentId)}
             disabled={isCheckingOut}
           >
-            Check out
+            Discharge
           </Button>
         )}
 
         <Modal>
           <Modal.Open opens="delete">
-            <Button variation="danger">Delete booking</Button>
+            <Button variation="danger">Delete appointment</Button>
           </Modal.Open>
 
           <Modal.Window name="delete">
             <ConfirmDelete
-              resourceName="booking"
+              resourceName="appointment"
               disabled={isDeleting}
               onConfirm={() =>
-                deleteBooking(bookingId, {
+                deleteAppointment(appointmentId, {
                   onSettled: () => navigate(-1),
                 })
               }

@@ -45,14 +45,16 @@ export async function getBookings({ filter, sortBy, page }) {
 
 export async function getBooking(id) {
   const { data, error } = await supabase
-    .from("bookings")
-    .select("*, cabins(*), guests(*)")
+    .from("appointments")
+    .select("*, wards(*), patients(*)")
     .eq("id", id)
     .single();
 
+  // console.log("data", data);
+
   if (error) {
     console.error(error);
-    throw new Error("Booking not found");
+    throw new Error("Appointment not found");
   }
 
   return data;
@@ -114,7 +116,7 @@ export async function getStaysTodayActivity() {
 
 export async function updateBooking(id, obj) {
   const { data, error } = await supabase
-    .from("bookings")
+    .from("appointments")
     .update(obj)
     .eq("id", id)
     .select()
@@ -122,8 +124,9 @@ export async function updateBooking(id, obj) {
 
   if (error) {
     console.error(error);
-    throw new Error("Booking could not be updated");
+    throw new Error("Appointment could not be updated");
   }
+  console.log("data", data);
   return data;
 }
 

@@ -223,6 +223,7 @@ async function createAppointments() {
     const extrasPrice = appointment.hasConsultation ? 100 : 0; // hardcoded consultation price
     const totalPrice = wardPrice + extrasPrice;
 
+    // TODO Make sure this is working correctly
     let status;
     if (
       isPast(new Date(appointment.endDate)) &&

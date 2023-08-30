@@ -2,16 +2,17 @@
 
 export const patients = [
   {
-    fullName: "Jonas Schmedtmann",
-    email: "hello@jonas.io",
-    nationality: "Portugal",
+    fullName: "Farah Hasan",
+    email: "farah@example.com",
+    nationality: "Syria",
     nationalID: "3525436345",
-    countryFlag: "https://flagcdn.com/pt.svg",
-    sex: "Male",
+    countryFlag: "https://flagcdn.com/sy.svg",
+    sex: "Female",
     healthInsuranceNumber: "HIN3525",
     medicalHistory: "No significant medical history.",
     insuranceInfo: "XYZ Health Insurance",
-    emergencyContact: "Sarah Schmedtmann (Spouse) - +123456789",
+    emergencyContact: "Lyla Hasan (Sister) - +123456789",
+    age: 25,
   },
   {
     fullName: "Jonathan Smith",
@@ -24,6 +25,7 @@ export const patients = [
     medicalHistory: "Allergies to pollen.",
     insuranceInfo: "ABC Health Insurance",
     emergencyContact: "Emily Smith (Sibling) - +987654321",
+    age: 30,
   },
   {
     fullName: "Jonatan Johansson",
@@ -36,6 +38,7 @@ export const patients = [
     medicalHistory: "Asthma condition.",
     insuranceInfo: "DEF Health Insurance",
     emergencyContact: "Anna Johansson (Spouse) - +876543210",
+    age: 54,
   },
   {
     fullName: "Jonas Mueller",
@@ -48,6 +51,7 @@ export const patients = [
     medicalHistory: "Previous surgery for appendicitis.",
     insuranceInfo: "GHI Health Insurance",
     emergencyContact: "Sophie Mueller (Spouse) - +234567890",
+    age: 74,
   },
   {
     fullName: "Jonas Anderson",
@@ -60,6 +64,7 @@ export const patients = [
     medicalHistory: "High blood pressure.",
     insuranceInfo: "JKL Health Insurance",
     emergencyContact: "Olivia Anderson (Spouse) - +345678901",
+    age: 49,
   },
   {
     fullName: "Jonathan Williams",
@@ -72,9 +77,10 @@ export const patients = [
     medicalHistory: "Diabetes type 2.",
     insuranceInfo: "MNO Health Insurance",
     emergencyContact: "Ethan Williams (Child) - +456789012",
+    age: 87,
   },
   {
-    fullName: "Emma Watson",
+    fullName: "Emma Cotson",
     email: "emma@gmail.com",
     nationality: "United Kingdom",
     nationalID: "1234578901",
@@ -83,7 +89,8 @@ export const patients = [
     healthInsuranceNumber: "HIN1234",
     medicalHistory: "Allergies to shellfish.",
     insuranceInfo: "PQR Health Insurance",
-    emergencyContact: "Oliver Watson (Spouse) - +567890123",
+    emergencyContact: "Oliver Cotson (Spouse) - +567890123",
+    age: 24,
   },
   {
     fullName: "Mohammed Ali",
@@ -96,6 +103,7 @@ export const patients = [
     medicalHistory: "Hypertension.",
     insuranceInfo: "STU Health Insurance",
     emergencyContact: "Amina Ali (Spouse) - +678901234",
+    age: 39,
   },
   {
     fullName: "Maria Rodriguez",
@@ -108,6 +116,7 @@ export const patients = [
     medicalHistory: "Previous fracture in right arm.",
     insuranceInfo: "VWX Health Insurance",
     emergencyContact: "Carlos Rodriguez (Spouse) - +789012345",
+    age: 37,
   },
   {
     fullName: "Li Mei",
@@ -120,6 +129,7 @@ export const patients = [
     medicalHistory: "No significant medical history.",
     insuranceInfo: "YZA Health Insurance",
     emergencyContact: "Xiao Chen (Sibling) - +890123456",
+    age: 84,
   },
   {
     fullName: "Khadija Ahmed",
@@ -132,6 +142,7 @@ export const patients = [
     medicalHistory: "Asthma condition.",
     insuranceInfo: "BCD Health Insurance",
     emergencyContact: "Ahmed Ahmed (Spouse) - +901234567",
+    age: 26,
   },
   {
     fullName: "Gabriel Silva",
@@ -144,6 +155,7 @@ export const patients = [
     medicalHistory: "Allergies to peanuts.",
     insuranceInfo: "DEF Health Insurance",
     emergencyContact: "Sophia Silva (Spouse) - +234567890",
+    age: 75,
   },
   {
     fullName: "Maria Gomez",
@@ -156,6 +168,7 @@ export const patients = [
     medicalHistory: "Previous surgery for broken leg.",
     insuranceInfo: "GHI Health Insurance",
     emergencyContact: "Carlos Gomez (Spouse) - +345678901",
+    age: 43,
   },
   {
     fullName: "Ahmed Hassan",
@@ -168,6 +181,7 @@ export const patients = [
     medicalHistory: "Diabetes type 1.",
     insuranceInfo: "JKL Health Insurance",
     emergencyContact: "Fatima Hassan (Spouse) - +456789012",
+    age: 84,
   },
   {
     fullName: "John Doe",
@@ -180,6 +194,7 @@ export const patients = [
     medicalHistory: "No significant medical history.",
     insuranceInfo: "XYZ Health Insurance",
     emergencyContact: "Jane Doe (Spouse) - +123456789",
+    age: 28,
   },
   {
     fullName: "Fatima Ahmed",
@@ -192,6 +207,7 @@ export const patients = [
     medicalHistory: "Allergies to penicillin.",
     insuranceInfo: "ABC Health Insurance",
     emergencyContact: "Ahmed Ahmed (Spouse) - +987654321",
+    age: 83,
   },
   {
     fullName: "David Smith",
@@ -204,6 +220,7 @@ export const patients = [
     medicalHistory: "Previous knee surgery.",
     insuranceInfo: "DEF Health Insurance",
     emergencyContact: "Olivia Smith (Spouse) - +876543210",
+    age: 64,
   },
   {
     fullName: "Marie Dupont",
@@ -216,6 +233,7 @@ export const patients = [
     medicalHistory: "Asthma condition.",
     insuranceInfo: "GHI Health Insurance",
     emergencyContact: "Pierre Dupont (Spouse) - +765432109",
+    age: 35,
   },
   {
     fullName: "Ramesh Patel",
@@ -228,6 +246,7 @@ export const patients = [
     medicalHistory: "High blood pressure.",
     insuranceInfo: "JKL Health Insurance",
     emergencyContact: "Neha Patel (Spouse) - +654321098",
+    age: 31,
   },
   {
     fullName: "Fatimah Al-Sayed",
@@ -240,6 +259,7 @@ export const patients = [
     medicalHistory: "Previous allergy to peanuts.",
     insuranceInfo: "MNO Health Insurance",
     emergencyContact: "Ahmad Al-Sayed (Spouse) - +543210987",
+    age: 67,
   },
   {
     fullName: "Nina Williams",
@@ -252,6 +272,7 @@ export const patients = [
     medicalHistory: "No significant medical history.",
     insuranceInfo: "PQR Health Insurance",
     emergencyContact: "Samuel Williams (Spouse) - +432109876",
+    age: 35,
   },
   {
     fullName: "Taro Tanaka",
@@ -264,6 +285,7 @@ export const patients = [
     medicalHistory: "Previous surgery for appendicitis.",
     insuranceInfo: "STU Health Insurance",
     emergencyContact: "Yuki Tanaka (Spouse) - +321098765",
+    age: 79,
   },
   {
     fullName: "Abdul Rahman",
@@ -276,6 +298,7 @@ export const patients = [
     medicalHistory: "Previous heart surgery.",
     insuranceInfo: "VWX Health Insurance",
     emergencyContact: "Layla Rahman (Spouse) - +210987654",
+    age: 24,
   },
   {
     fullName: "Julie Nguyen",
@@ -288,6 +311,7 @@ export const patients = [
     medicalHistory: "Allergies to shellfish.",
     insuranceInfo: "YZA Health Insurance",
     emergencyContact: "Minh Nguyen (Spouse) - +109876543",
+    age: 41,
   },
   {
     fullName: "Sara Lee",
@@ -300,6 +324,7 @@ export const patients = [
     medicalHistory: "Previous fracture in right arm.",
     insuranceInfo: "BCD Health Insurance",
     emergencyContact: "Joon Lee (Spouse) - +098765432",
+    age: 23,
   },
   {
     fullName: "Carlos Gomez",
@@ -312,6 +337,7 @@ export const patients = [
     medicalHistory: "Diabetes type 2.",
     insuranceInfo: "EFG Health Insurance",
     emergencyContact: "Maria Gomez (Spouse) - +987654321",
+    age: 24,
   },
   {
     fullName: "Emma Brown",
@@ -324,6 +350,7 @@ export const patients = [
     medicalHistory: "No significant medical history.",
     insuranceInfo: "HIJ Health Insurance",
     emergencyContact: "William Brown (Spouse) - +876543210",
+    age: 41,
   },
   {
     fullName: "Juan Hernandez",
@@ -336,6 +363,7 @@ export const patients = [
     medicalHistory: "Asthma condition.",
     insuranceInfo: "KLM Health Insurance",
     emergencyContact: "Ana Hernandez (Spouse) - +765432109",
+    age: 22,
   },
   {
     fullName: "Ibrahim Ahmed",
@@ -348,6 +376,7 @@ export const patients = [
     medicalHistory: "Previous surgery for broken leg.",
     insuranceInfo: "NOP Health Insurance",
     emergencyContact: "Aisha Ahmed (Spouse) - +654321098",
+    age: 74,
   },
   {
     fullName: "Mei Chen",
@@ -360,6 +389,7 @@ export const patients = [
     medicalHistory: "Allergies to peanuts.",
     insuranceInfo: "QRS Health Insurance",
     emergencyContact: "Wei Chen (Spouse) - +543210987",
+    age: 88,
   },
   {
     fullName: "John Smith",
@@ -372,6 +402,7 @@ export const patients = [
     medicalHistory: "No significant medical history.",
     insuranceInfo: "HIJ Health Insurance",
     emergencyContact: "Jane Smith (Spouse) - +123456789",
+    age: 89,
   },
   {
     fullName: "Fay Johnson",
@@ -384,6 +415,7 @@ export const patients = [
     medicalHistory: "Allergies to peanuts.",
     insuranceInfo: "ABC Health Insurance",
     emergencyContact: "Jack Johnson (Spouse) - +987654321",
+    age: 55,
   },
   {
     fullName: "Mark Davis",
@@ -396,6 +428,7 @@ export const patients = [
     medicalHistory: "High blood pressure.",
     insuranceInfo: "XYZ Health Insurance",
     emergencyContact: "Emily Davis (Spouse) - +345678901",
+    age: 62,
   },
   {
     fullName: "Sophia Lee",
@@ -408,6 +441,7 @@ export const patients = [
     medicalHistory: "Asthma condition.",
     insuranceInfo: "MNO Health Insurance",
     emergencyContact: "David Lee (Spouse) - +567890123",
+    age: 42,
   },
   {
     fullName: "Ahmad Khan",
@@ -420,6 +454,7 @@ export const patients = [
     medicalHistory: "Diabetes type 2.",
     insuranceInfo: "PQR Health Insurance",
     emergencyContact: "Amina Khan (Spouse) - +789012345",
+    age: 54,
   },
   {
     fullName: "Lucia Rodriguez",
@@ -432,6 +467,7 @@ export const patients = [
     medicalHistory: "Previous surgery for broken leg.",
     insuranceInfo: "STU Health Insurance",
     emergencyContact: "Carlos Rodriguez (Spouse) - +890123456",
+    age: 42,
   },
   {
     fullName: "Hassan Ahmed",
@@ -444,6 +480,7 @@ export const patients = [
     medicalHistory: "No significant medical history.",
     insuranceInfo: "GHI Health Insurance",
     emergencyContact: "Fatima Ahmed (Spouse) - +654321098",
+    age: 63,
   },
   {
     fullName: "Ella White",
@@ -456,6 +493,7 @@ export const patients = [
     medicalHistory: "Allergies to shellfish.",
     insuranceInfo: "DEF Health Insurance",
     emergencyContact: "Oliver White (Spouse) - +432109876",
+    age: 18,
   },
   {
     fullName: "Jose Gonzalez",
@@ -468,6 +506,7 @@ export const patients = [
     medicalHistory: "Previous surgery for appendicitis.",
     insuranceInfo: "JKL Health Insurance",
     emergencyContact: "Maria Gonzalez (Spouse) - +321098765",
+    age: 24,
   },
   {
     fullName: "Li Wang",
@@ -480,6 +519,7 @@ export const patients = [
     medicalHistory: "Hypertension.",
     insuranceInfo: "NOP Health Insurance",
     emergencyContact: "Xiao Wang (Spouse) - +210987654",
+    age: 68,
   },
   {
     fullName: "Luisa Martinez",
@@ -492,6 +532,7 @@ export const patients = [
     medicalHistory: "No significant medical history.",
     insuranceInfo: "MEX Health Insurance",
     emergencyContact: "Carlos Martinez (Spouse) - +123456789",
+    age: 67,
   },
   {
     fullName: "Alexander Petrov",
@@ -504,6 +545,7 @@ export const patients = [
     medicalHistory: "Previous knee injury.",
     insuranceInfo: "RUS Health Insurance",
     emergencyContact: "Elena Petrova (Spouse) - +987654321",
+    age: 71,
   },
   {
     fullName: "Isabella Moretti",
@@ -516,6 +558,7 @@ export const patients = [
     medicalHistory: "Allergies to seafood.",
     insuranceInfo: "ITA Health Insurance",
     emergencyContact: "Marco Moretti (Spouse) - +345678901",
+    age: 22,
   },
   {
     fullName: "Mohammed Abdi",
@@ -528,5 +571,6 @@ export const patients = [
     medicalHistory: "High cholesterol.",
     insuranceInfo: "KEN Health Insurance",
     emergencyContact: "Amina Abdi (Spouse) - +567890123",
+    age: 82,
   },
 ];

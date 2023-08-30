@@ -104,7 +104,7 @@ function BookingRow({
           <Menus.List id={appointmentId}>
             <Menus.Button
               icon={<HiEye />}
-              onClick={() => navigate(`/bookings/${appointmentId}`)}
+              onClick={() => navigate(`/appointments/${appointmentId}`)}
             >
               See details
             </Menus.Button>

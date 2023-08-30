@@ -6,6 +6,7 @@ import {
   HiOutlineCurrencyDollar,
   HiOutlineHomeModern,
 } from "react-icons/hi2";
+import { FaMale, FaFemale } from "react-icons/fa";
 
 import DataItem from "../../ui/DataItem";
 import { Flag } from "../../ui/Flag";
@@ -102,30 +103,78 @@ const Footer = styled.footer`
 `;
 
 // A purely presentational component
-function BookingDataBox({ booking }) {
+function BookingDataBox({ appointment }) {
   const {
     created_at,
     startDate,
     endDate,
     numNights,
     numGuests,
-    cabinPrice,
+    wardPrice,
     extrasPrice,
     totalPrice,
-    hasBreakfast,
+    hasConsultation,
+    hasInsurance,
+    requiresSpecialEquipment,
     observations,
     isPaid,
-    guests: { fullName: guestName, email, country, countryFlag, nationalID },
-    cabins: { name: cabinName },
-  } = booking;
+    patients: {
+      fullName: patientName,
+      email,
+      nationality,
+      countryFlag,
+      nationalID,
+      sex,
+      age,
+      healthInsuranceNumber,
+      insuranceInfo,
+      medicalHistory,
+      emergencyContact,
+    },
+    wards: { name: wardName },
+  } = appointment;
+  // console.log("created_at", created_at);
+  // console.log("startDate", startDate);
+  // console.log("endDate", endDate);
+  // console.log("numNights", numNights);
+  // console.log("numGuests", numGuests);
+  // console.log("wardPrice", wardPrice);
+  // console.log("extrasPrice", extrasPrice);
+  // console.log("totalPrice", totalPrice);
+  // console.log("hasConsultation", hasConsultation);
+  // console.log("hasInsurance", hasInsurance);
+  // console.log("requiresSpecialEquipment", requiresSpecialEquipment);
+  // console.log("observations", observations);
+  // console.log("isPaid", isPaid);
+  // console.log("patientName", patientName);
+  // console.log("email", email);
+  // console.log("nationality", nationality);
+  // console.log("countryFlag", countryFlag);
+  // console.log("nationalID", nationalID);
+  // console.log("sex", sex);
+  // console.log("age", age);
+  // console.log("healthInsuranceNumber", healthInsuranceNumber);
+  // console.log("insuranceInfo", insuranceInfo);
+  // console.log("medicalHistory", medicalHistory);
+  // console.log("emergencyContact", emergencyContact);
 
+  // Define a variable to check if it's paid, or covered by insurance, or payment is outstanding
+  let paymentStatus;
+
+  if (isPaid) {
+    paymentStatus = "Paid";
+  } else if (hasInsurance) {
+    paymentStatus = "Covered by insurance";
+  } else {
+    paymentStatus = "Payment outstanding";
+  }
   return (
     <StyledBookingDataBox>
       <Header>
         <div>
           <HiOutlineHomeModern />
           <p>
-            {numNights} nights in Cabin <span>{cabinName}</span>
+            {numNights} nights in Cabin <span>{wardName}</span>
           </p>
         </div>
 
@@ -140,45 +189,57 @@ function BookingDataBox({ booking }) {
 
       <Section>
         <Guest>
-          {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />}
+          {sex === "Male" ? <FaMale /> : <FaFemale />}
           <p>
-            {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
+            {patientName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
           </p>
+          <span>&bull;</span>
+          {countryFlag && (
+            <Flag src={countryFlag} alt={`Flag of ${nationality}`} />
+          )}
+          <span>&bull;</span>
+          <p>{age} years old</p>
           <span>&bull;</span>
           <p>{email}</p>
           <span>&bull;</span>
-          <p>National ID {nationalID}</p>
+          <p>Health Insurance Number: {healthInsuranceNumber}</p>
         </Guest>
 
         {observations && (
           <DataItem
             icon={<HiOutlineChatBubbleBottomCenterText />}
-            label="Observations"
+            label="Symptoms:"
           >
             {observations}
           </DataItem>
         )}
 
-        <DataItem icon={<HiOutlineCheckCircle />} label="Breakfast included?">
-          {hasBreakfast ? "Yes" : "No"}
+        <DataItem
+          icon={<HiOutlineCheckCircle />}
+          label="Consultation included?"
+        >
+          {hasConsultation ? "Yes" : "No"}
+        </DataItem>
+
+        <DataItem icon={<HiOutlineCheckCircle />} label="Has Insurance?">
+          {hasInsurance ? "Yes" : "No"}
         </DataItem>
 
         <Price isPaid={isPaid}>
-          <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
+          <DataItem icon={<HiOutlineCurrencyDollar />} label={"Total cost"}>
             {formatCurrency(totalPrice)}
 
-            {hasBreakfast &&
-              ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
+            {hasConsultation &&
+              ` (${formatCurrency(wardPrice)} stay + ${formatCurrency(
                 extrasPrice
-              )} breakfast)`}
+              )} consultation)`}
           </DataItem>
-
-          <p>{isPaid ? "Paid" : "Will pay at property"}</p>
+          <p>{paymentStatus}</p>
         </Price>
       </Section>
 
       <Footer>
-        <p>Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
+        <p>Scheduled {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
       </Footer>
     </StyledBookingDataBox>
   );
