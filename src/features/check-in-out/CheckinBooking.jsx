@@ -15,6 +15,7 @@ import Checkbox from "../../ui/Checkbox";
 import { formatCurrency } from "../../utils/helpers";
 import { useCheckin } from "./useCheckin";
 import { useSettings } from "../settings/useSettings";
+import { useRedirect } from "../../context/RedirectContext";
 
 const Box = styled.div`
   /* Box */
@@ -28,13 +29,12 @@ function CheckinBooking() {
   const [confirmPaid, setConfirmPaid] = useState(false);
   const [addConsultation, setAddConsultation] = useState(false);
   const { appointment, isLoading } = useBooking();
-  console.log("appointment", appointment);
   const { settings, isLoading: isLoadingSettings } = useSettings();
-
+  const { redirectTo } = useRedirect();
   useEffect(() => setConfirmPaid(appointment?.isPaid ?? false), [appointment]);
 
   const moveBack = useMoveBack();
-  const { checkin, isCheckingIn } = useCheckin();
+  const { checkin, isCheckingIn } = useCheckin({ redirect: redirectTo });
 
   if (isLoading || isLoadingSettings) return <Spinner />;
 
@@ -42,9 +42,9 @@ function CheckinBooking() {
     id: appointmentId,
     patients,
     totalPrice,
-    numGuests,
+    // numGuests,
     hasConsultation,
-    numNights,
+    // numNights,
   } = appointment;
 
   const optionalConsultationPrice = settings.consultationPrice;
@@ -52,7 +52,6 @@ function CheckinBooking() {
   function handleCheckin() {
     if (!confirmPaid) return;
 
-    console.log("addConsultation", addConsultation);
     if (addConsultation) {
       checkin({
         appointmentId,
@@ -63,7 +62,6 @@ function CheckinBooking() {
         },
       });
     } else {
-      console.log("appointmentId", appointmentId);
       checkin({ appointmentId, consulation: {} });
     }
   }

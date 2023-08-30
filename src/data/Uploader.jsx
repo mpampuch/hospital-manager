@@ -137,8 +137,6 @@ async function createBookings() {
     };
   });
 
-  console.log("finalBookings", finalBookings);
-
   const { error } = await supabase.from("bookings").insert(finalBookings);
   if (error) console.log(error.message);
 }
@@ -261,7 +259,6 @@ async function createAppointments() {
       observations,
     };
   });
-  console.log("finalAppointments", finalAppointments);
 
   const { error } = await supabase
     .from("appointments")

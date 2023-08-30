@@ -6,10 +6,12 @@ import Empty from "../../ui/Empty";
 import { useBookings } from "./useBookings";
 import Spinner from "../../ui/Spinner";
 import Pagination from "../../ui/Pagination";
+import { useRedirect } from "../../context/RedirectContext";
 
 function BookingTable() {
   const { appointments, isLoading, count } = useBookings();
-  // console.log("appointments", appointments);
+  const { updateRedirect } = useRedirect();
+  updateRedirect("/appointments");
 
   if (isLoading) return <Spinner />;
 
@@ -30,7 +32,6 @@ function BookingTable() {
         <Table.Body
           data={appointments}
           render={(appointment) => {
-            console.log("appointment", appointment); // Log the 'appointment' object
             return (
               <BookingRow key={appointment.id} appointment={appointment} />
             );

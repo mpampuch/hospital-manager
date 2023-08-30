@@ -26,28 +26,30 @@ const Guest = styled.div`
 `;
 
 function TodayItem({ activity }) {
-  const { id, status, guests, numNights } = activity;
+  const { id, status, patients, numNights } = activity;
 
   return (
     <StyledTodayItem>
-      {status === "unconfirmed" && <Tag type="green">Arriving</Tag>}
-      {status === "checked-in" && <Tag type="blue">Departing</Tag>}
+      {status === "scheduled" && <Tag type="green">Arriving</Tag>}
+      {status === "admitted" && <Tag type="blue">Cleared</Tag>}
 
-      <Flag src={guests.countryFlag} alt={`Flag of ${guests.country}`} />
-      <Guest>{guests.fullName}</Guest>
+      <Flag src={patients.countryFlag} alt={`Flag of ${patients.country}`} />
+      <Guest>{patients.fullName}</Guest>
       <div>{numNights} nights</div>
 
-      {status === "unconfirmed" && (
+      {status === "scheduled" && (
         <Button
           size="small"
           variation="primary"
           as={Link}
           to={`/checkin/${id}`}
+          // TODO FIX THIS
+          redirect="/"
         >
-          Check in
+          Admit
         </Button>
       )}
-      {status === "checked-in" && <CheckoutButton bookingId={id} />}
+      {status === "admitted" && <CheckoutButton appointmentId={id} />}
     </StyledTodayItem>
   );
 }

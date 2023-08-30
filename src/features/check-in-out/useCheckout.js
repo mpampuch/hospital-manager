@@ -12,7 +12,7 @@ export function useCheckout() {
       }),
 
     onSuccess: (data) => {
-      toast.success(`Booking #${data.id} successfully discharged`);
+      toast.success(`${data.patients.fullName} successfully discharged`);
       queryClient.invalidateQueries({ active: true });
     },
 

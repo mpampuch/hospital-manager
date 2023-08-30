@@ -27,7 +27,6 @@ const HeadingGroup = styled.div`
 
 function BookingDetail() {
   const { appointment, isLoading } = useBooking();
-  console.log("appointment", appointment);
   const { checkout, isCheckingOut } = useCheckout();
   const { deleteAppointment, isDeleting } = useDeleteBooking();
 

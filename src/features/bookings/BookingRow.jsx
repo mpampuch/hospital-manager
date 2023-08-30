@@ -60,8 +60,6 @@ function BookingRow({
     wards: { name: wardName },
   },
 }) {
-  console.log("appointmentId", appointmentId);
-
   const navigate = useNavigate();
   const { checkout, isCheckingOut } = useCheckout();
   const { deleteAppointment, isDeleting } = useDeleteBooking();

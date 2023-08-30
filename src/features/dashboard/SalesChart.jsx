@@ -23,7 +23,7 @@ const StyledSalesChart = styled(DashboardBox)`
   }
 `;
 
-function SalesChart({ bookings, numDays }) {
+function SalesChart({ appointments, numDays }) {
   const { isDarkMode } = useDarkMode();
 
   const allDates = eachDayOfInterval({
@@ -34,11 +34,15 @@ function SalesChart({ bookings, numDays }) {
   const data = allDates.map((date) => {
     return {
       label: format(date, "MMM dd"),
-      totalSales: bookings
-        .filter((booking) => isSameDay(date, new Date(booking.created_at)))
+      totalSales: appointments
+        .filter((appointment) =>
+          isSameDay(date, new Date(appointment.created_at))
+        )
         .reduce((acc, cur) => acc + cur.totalPrice, 0),
-      extrasSales: bookings
-        .filter((booking) => isSameDay(date, new Date(booking.created_at)))
+      extrasSales: appointments
+        .filter((appointment) =>
+          isSameDay(date, new Date(appointment.created_at))
+        )
         .reduce((acc, cur) => acc + cur.extrasPrice, 0),
     };
   });

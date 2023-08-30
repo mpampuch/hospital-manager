@@ -49,9 +49,9 @@ export const appointments = [
   },
   // APPOINTMENT 3
   {
-    created_at: fromToday(-27, true),
-    startDate: fromToday(12),
-    endDate: fromToday(18),
+    created_at: fromToday(-20, true),
+    startDate: fromToday(0),
+    endDate: fromToday(10),
     numNights: null,
     numGuests: null,
     wardPrice: 0,
@@ -113,9 +113,9 @@ export const appointments = [
   },
   // APPOINTMENT 6
   {
-    created_at: fromToday(-3, true),
-    startDate: fromToday(15),
-    endDate: fromToday(20),
+    created_at: fromToday(-12, true),
+    startDate: fromToday(0),
+    endDate: fromToday(2),
     numNights: null,
     numGuests: null,
     wardPrice: 0,
@@ -134,8 +134,8 @@ export const appointments = [
   // APPOINTMENT 7
   {
     created_at: fromToday(-15, true),
-    startDate: fromToday(10),
-    endDate: fromToday(14),
+    startDate: fromToday(0),
+    endDate: fromToday(),
     numNights: null,
     numGuests: null,
     wardPrice: 0,
@@ -173,9 +173,9 @@ export const appointments = [
   },
   // APPOINTMENT 9
   {
-    created_at: fromToday(-20, true),
-    startDate: fromToday(10),
-    endDate: fromToday(15),
+    created_at: fromToday(-12, true),
+    startDate: fromToday(0),
+    endDate: fromToday(4),
     numNights: null,
     numGuests: null,
     wardPrice: 0,
@@ -217,9 +217,9 @@ export const appointments = [
 
   // APPOINTMENT 11
   {
-    created_at: fromToday(-5, true),
-    startDate: fromToday(14),
-    endDate: fromToday(17),
+    created_at: fromToday(-16, true),
+    startDate: fromToday(-2),
+    endDate: fromToday(0),
     numNights: null,
     numGuests: null,
     wardPrice: 0,
@@ -258,8 +258,8 @@ export const appointments = [
   // APPOINTMENT 13
   {
     created_at: fromToday(-18, true),
-    startDate: fromToday(8),
-    endDate: fromToday(13),
+    startDate: fromToday(-2),
+    endDate: fromToday(0),
     numNights: null,
     numGuests: null,
     wardPrice: 0,
@@ -297,9 +297,9 @@ export const appointments = [
   },
   // APPOINTMENT 15
   {
-    created_at: fromToday(-3, true),
-    startDate: fromToday(18),
-    endDate: fromToday(22),
+    created_at: fromToday(-12, true),
+    startDate: fromToday(-2),
+    endDate: fromToday(6),
     numNights: null,
     numGuests: null,
     wardPrice: 0,
@@ -418,8 +418,8 @@ export const appointments = [
   // APPOINTMENT 21
   {
     created_at: fromToday(-9, true),
-    startDate: fromToday(5),
-    endDate: fromToday(9),
+    startDate: fromToday(-6),
+    endDate: fromToday(0),
     numNights: null,
     numGuests: null,
     wardPrice: 0,
@@ -438,8 +438,8 @@ export const appointments = [
   // APPOINTMENT 22
   {
     created_at: fromToday(-7, true),
-    startDate: fromToday(12),
-    endDate: fromToday(16),
+    startDate: fromToday(-5),
+    endDate: fromToday(1),
     numNights: null,
     numGuests: null,
     wardPrice: 0,
@@ -458,8 +458,8 @@ export const appointments = [
   // APPOINTMENT 23
   {
     created_at: fromToday(-10, true),
-    startDate: fromToday(15),
-    endDate: fromToday(19),
+    startDate: fromToday(-4),
+    endDate: fromToday(4),
     numNights: null,
     numGuests: null,
     wardPrice: 0,
@@ -478,8 +478,8 @@ export const appointments = [
   // APPOINTMENT 24
   {
     created_at: fromToday(-6, true),
-    startDate: fromToday(25),
-    endDate: fromToday(30),
+    startDate: fromToday(-3),
+    endDate: fromToday(3),
     numNights: null,
     numGuests: null,
     wardPrice: 0,

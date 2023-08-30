@@ -133,30 +133,6 @@ function BookingDataBox({ appointment }) {
     },
     wards: { name: wardName },
   } = appointment;
-  // console.log("created_at", created_at);
-  // console.log("startDate", startDate);
-  // console.log("endDate", endDate);
-  // console.log("numNights", numNights);
-  // console.log("numGuests", numGuests);
-  // console.log("wardPrice", wardPrice);
-  // console.log("extrasPrice", extrasPrice);
-  // console.log("totalPrice", totalPrice);
-  // console.log("hasConsultation", hasConsultation);
-  // console.log("hasInsurance", hasInsurance);
-  // console.log("requiresSpecialEquipment", requiresSpecialEquipment);
-  // console.log("observations", observations);
-  // console.log("isPaid", isPaid);
-  // console.log("patientName", patientName);
-  // console.log("email", email);
-  // console.log("nationality", nationality);
-  // console.log("countryFlag", countryFlag);
-  // console.log("nationalID", nationalID);
-  // console.log("sex", sex);
-  // console.log("age", age);
-  // console.log("healthInsuranceNumber", healthInsuranceNumber);
-  // console.log("insuranceInfo", insuranceInfo);
-  // console.log("medicalHistory", medicalHistory);
-  // console.log("emergencyContact", emergencyContact);
 
   // Define a variable to check if it's paid, or covered by insurance, or payment is outstanding
   let paymentStatus;

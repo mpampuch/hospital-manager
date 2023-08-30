@@ -2,7 +2,6 @@ import supabase, { supabaseUrl } from "./supabase";
 
 export async function getCabins() {
   const { data, error } = await supabase.from("wards").select("*");
-  // console.log("data", data);
 
   if (error) {
     console.error(error);
@@ -13,26 +12,19 @@ export async function getCabins() {
 }
 
 export async function createEditCabin(newWard, id) {
-  // console.log("newWard", newWard);
-  // console.log("id", id);
-
   const hasImagePath = newWard.image?.startsWith?.(supabaseUrl);
-  // console.log("hasImagePath", hasImagePath);
 
   const imageName = `${Math.random()}-${newWard.image.name}`.replaceAll(
     "/",
     ""
   );
-  // console.log("imageName", imageName);
 
   const imagePath = hasImagePath
     ? newWard.image
     : `${supabaseUrl}/storage/v1/object/public/ward-images/${imageName}`;
-  // console.log("imagePath", imagePath);
 
   // 1. Create/edit cabin
   let query = supabase.from("wards");
-  // console.log("query", query);
 
   // A) CREATE
   if (!id) query = query.insert([{ ...newWard, image: imagePath }]);
@@ -41,7 +33,6 @@ export async function createEditCabin(newWard, id) {
   if (id) query = query.update({ ...newWard, image: imagePath }).eq("id", id);
 
   const { data, error } = await query.select().single();
-  // console.log("data", data);
 
   if (error) {
     console.error(error);
@@ -49,7 +40,6 @@ export async function createEditCabin(newWard, id) {
   }
 
   // 2. Upload image
-  // console.log("hasImagePath", hasImagePath);
   if (hasImagePath) return data;
 
   const { error: storageError } = await supabase.storage
@@ -70,7 +60,6 @@ export async function createEditCabin(newWard, id) {
 
 export async function deleteCabin(id) {
   const { data, error } = await supabase.from("wards").delete().eq("id", id);
-  // console.log("data", data);
 
   if (error) {
     console.error(error);

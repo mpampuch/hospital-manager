@@ -17,9 +17,6 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
-  console.log("editValues", editValues);
-  console.log("editId", editId);
-  console.log("isEditSession", isEditSession);
 
   const { register, handleSubmit, reset, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
@@ -27,9 +24,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { errors } = formState;
 
   function onSubmit(data) {
-    console.log("data", data);
     const image = typeof data.image === "string" ? data.image : data.image[0];
-    console.log("image", image);
 
     if (isEditSession)
       editCabin(

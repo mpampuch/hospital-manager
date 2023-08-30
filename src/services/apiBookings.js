@@ -9,21 +9,17 @@ export async function getBookings({ filter, sortBy, page }) {
       "id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, wards(name), patients(fullName, email)",
       { count: "exact" }
     );
-  // console.log("query", query);
 
   // FILTER
-  // console.log("filter", filter);
   if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
 
   // SORT
-  // console.log("sortBy", sortBy);
   if (sortBy)
     query = query.order(sortBy.field, {
       ascending: sortBy.direction === "asc",
     });
 
   // PAGINATION
-  // console.log("page", page);
   if (page) {
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE - 1;
@@ -31,9 +27,6 @@ export async function getBookings({ filter, sortBy, page }) {
   }
 
   const { data, error, count } = await query;
-  // console.log("query_awaited", query);
-  // console.log("data", data);
-  // console.log("count", count);
 
   if (error) {
     console.error(error);
@@ -50,8 +43,6 @@ export async function getBooking(id) {
     .eq("id", id)
     .single();
 
-  // console.log("data", data);
-
   if (error) {
     console.error(error);
     throw new Error("Appointment not found");
@@ -64,14 +55,14 @@ export async function getBooking(id) {
 // date: ISOString
 export async function getBookingsAfterDate(date) {
   const { data, error } = await supabase
-    .from("bookings")
+    .from("appointments")
     .select("created_at, totalPrice, extrasPrice")
     .gte("created_at", date)
     .lte("created_at", getToday({ end: true }));
 
   if (error) {
     console.error(error);
-    throw new Error("Bookings could not get loaded");
+    throw new Error("Appointments could not get loaded");
   }
 
   return data;
@@ -80,14 +71,14 @@ export async function getBookingsAfterDate(date) {
 // Returns all STAYS that are were created after the given date
 export async function getStaysAfterDate(date) {
   const { data, error } = await supabase
-    .from("bookings")
-    .select("*, guests(fullName)")
+    .from("appointments")
+    .select("*, patients(fullName)")
     .gte("startDate", date)
     .lte("startDate", getToday());
 
   if (error) {
     console.error(error);
-    throw new Error("Bookings could not get loaded");
+    throw new Error("Appointments could not get loaded");
   }
 
   return data;
@@ -96,10 +87,10 @@ export async function getStaysAfterDate(date) {
 // Activity means that there is a check in or a check out today
 export async function getStaysTodayActivity() {
   const { data, error } = await supabase
-    .from("bookings")
-    .select("*, guests(fullName, nationality, countryFlag)")
+    .from("appointments")
+    .select("*, patients(fullName, nationality, countryFlag)")
     .or(
-      `and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.checked-in,endDate.eq.${getToday()})`
+      `and(status.eq.scheduled,startDate.eq.${getToday()}),and(status.eq.admitted,endDate.eq.${getToday()})`
     )
     .order("created_at");
 
@@ -109,8 +100,9 @@ export async function getStaysTodayActivity() {
 
   if (error) {
     console.error(error);
-    throw new Error("Bookings could not get loaded");
+    throw new Error("Appointments could not get loaded");
   }
+
   return data;
 }
 
@@ -119,14 +111,13 @@ export async function updateBooking(id, obj) {
     .from("appointments")
     .update(obj)
     .eq("id", id)
-    .select()
+    .select("*, patients(fullName)")
     .single();
 
   if (error) {
     console.error(error);
     throw new Error("Appointment could not be updated");
   }
-  console.log("data", data);
   return data;
 }
 

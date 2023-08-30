@@ -9,9 +9,9 @@ function BookingTableOperations() {
         filterField="status"
         options={[
           { value: "all", label: "All" },
-          { value: "discharged", label: "Discharged" },
-          { value: "admitted", label: "Admitted" },
           { value: "scheduled", label: "Scheduled" },
+          { value: "admitted", label: "Admitted" },
+          { value: "discharged", label: "Discharged" },
         ]}
       />
 
