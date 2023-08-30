@@ -8,29 +8,33 @@ import Spinner from "../../ui/Spinner";
 import Pagination from "../../ui/Pagination";
 
 function BookingTable() {
-  const { bookings, isLoading, count } = useBookings();
+  const { appointments, isLoading, count } = useBookings();
+  // console.log("appointments", appointments);
 
   if (isLoading) return <Spinner />;
 
-  if (!bookings.length) return <Empty resourceName="bookings" />;
+  if (!appointments.length) return <Empty resourceName="appointments" />;
 
   return (
     <Menus>
-      <Table columns="0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem">
+      <Table columns="0.6fr 1.8fr 2.2fr 1.2fr 1.6fr 3.2rem">
         <Table.Header>
           <div>Cabin</div>
           <div>Guest</div>
           <div>Dates</div>
-          <div>Status</div>
-          <div>Amount</div>
+          <div style={{ transform: "translate(1.4rem)" }}>Status</div>
+          <div>Estimated Cost</div>
           <div></div>
         </Table.Header>
 
         <Table.Body
-          data={bookings}
-          render={(booking) => (
-            <BookingRow key={booking.id} booking={booking} />
-          )}
+          data={appointments}
+          render={(appointment) => {
+            console.log("appointment", appointment); // Log the 'appointment' object
+            return (
+              <BookingRow key={appointment.id} appointment={appointment} />
+            );
+          }}
         />
 
         <Table.Footer>

@@ -4,21 +4,26 @@ import { PAGE_SIZE } from "../utils/constants";
 
 export async function getBookings({ filter, sortBy, page }) {
   let query = supabase
-    .from("bookings")
+    .from("appointments")
     .select(
-      "id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)",
+      "id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, wards(name), patients(fullName, email)",
       { count: "exact" }
     );
+  // console.log("query", query);
 
   // FILTER
+  // console.log("filter", filter);
   if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
 
   // SORT
+  // console.log("sortBy", sortBy);
   if (sortBy)
     query = query.order(sortBy.field, {
       ascending: sortBy.direction === "asc",
     });
 
+  // PAGINATION
+  // console.log("page", page);
   if (page) {
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE - 1;
@@ -26,10 +31,13 @@ export async function getBookings({ filter, sortBy, page }) {
   }
 
   const { data, error, count } = await query;
+  // console.log("query_awaited", query);
+  // console.log("data", data);
+  // console.log("count", count);
 
   if (error) {
     console.error(error);
-    throw new Error("Bookings could not be loaded");
+    throw new Error("Appointments could not be loaded");
   }
 
   return { data, count };
