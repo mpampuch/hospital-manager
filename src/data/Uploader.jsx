@@ -261,6 +261,11 @@ async function createAppointments() {
     };
   });
   console.log("finalAppointments", finalAppointments);
+
+  const { error } = await supabase
+    .from("appointments")
+    .insert(finalAppointments);
+  if (error) console.log(error.message);
 }
 
 function Uploader() {
