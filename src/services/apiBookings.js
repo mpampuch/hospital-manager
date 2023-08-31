@@ -48,7 +48,6 @@ export async function getBooking(id) {
     throw new Error("Appointment not found");
   }
 
-  console.log(data);
   return data;
 }
 

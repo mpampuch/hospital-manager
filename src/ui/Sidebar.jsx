@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Logo from "./Logo";
 import MainNav from "./MainNav";
 import Copyright from "./Copyright";
-import Uploader from "../data/Uploader";
+// import Uploader from "../data/Uploader";
 import { Link } from "react-router-dom";
 
 const StyledSidebar = styled.aside`

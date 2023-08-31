@@ -27,62 +27,62 @@ function randomBoolean(cutoff = 0.5) {
 
 async function deleteGuests() {
   const { error } = await supabase.from("guests").delete().gt("id", 0);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function deleteCabins() {
   const { error } = await supabase.from("cabins").delete().gt("id", 0);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function deleteBookings() {
   const { error } = await supabase.from("bookings").delete().gt("id", 0);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function deleteWards() {
   const { error } = await supabase.from("wards").delete().gt("id", 0);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function deletePatients() {
   const { error } = await supabase.from("patients").delete().gt("id", 0);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function deleteDoctors() {
   const { error } = await supabase.from("doctors").delete().gt("id", 0);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function deleteAppointments() {
   const { error } = await supabase.from("appointments").delete().gt("id", 0);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function createGuests() {
   const { error } = await supabase.from("guests").insert(guests);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function createCabins() {
   const { error } = await supabase.from("cabins").insert(cabins);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function createWards() {
   const { error } = await supabase.from("wards").insert(wards);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function createPatients() {
   const { error } = await supabase.from("patients").insert(patients);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function createDoctors() {
   const { error } = await supabase.from("doctors").insert(doctors);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 async function createBookings() {
@@ -140,7 +140,7 @@ async function createBookings() {
   });
 
   const { error } = await supabase.from("bookings").insert(finalBookings);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 // Function to generate random medical appointment details
@@ -207,14 +207,10 @@ async function createAppointments() {
     .select("id")
     .order("id");
   const allWardIds = wardsIds.map((ward) => ward.id);
-  console.log("patientsIds", patientsIds);
-  console.log("doctorsIds", doctorsIds);
-  console.log("wardsIds", wardsIds);
-  console.log("appointments", appointments);
+
   const finalAppointments = appointments.map((appointment) => {
     // Here relying on the order of wards, as they don't have and ID yet
     const ward = wards.at(appointment.wardId - 1);
-    console.log("ward", ward);
     const numNights = subtractDates(appointment.endDate, appointment.startDate);
     const wardPrice = numNights * ward.dailyCost;
     const numGuests = 0;
@@ -271,12 +267,11 @@ async function createAppointments() {
       observations,
     };
   });
-  console.log("finalAppointments", finalAppointments);
 
   const { error } = await supabase
     .from("appointments")
     .insert(finalAppointments);
-  if (error) console.log(error.message);
+  if (error) console.error(error.message);
 }
 
 function Uploader() {
