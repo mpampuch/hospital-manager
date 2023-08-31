@@ -27,9 +27,10 @@ const GlobalStyles = createGlobalStyle`
   --color-indigo-100: #e0e7ff;
   --color-indigo-700: #4338ca;
 
-  --color-red-100: #fee2e2;
-  --color-red-700: #b91c1c;
-  --color-red-800: #991b1b;
+
+  /* Hack to effect red icons but not red delete buttons on dark mode */
+  --color-red-99: #fee2e2;
+  --color-red-699: #991b1b;
 
   --backdrop-color: rgba(255, 255, 255, 0.1);
 
@@ -66,9 +67,9 @@ const GlobalStyles = createGlobalStyle`
 --color-indigo-100: #3730a3;
 --color-indigo-700: #e0e7ff;
 
---color-red-100: #fee2e2;
---color-red-700: #b91c1c;
---color-red-800: #991b1b;
+/* Hack to effect red icons but not red delete buttons on dark mode */
+--color-red-99: #991b1b;
+--color-red-699: #fee2e2;
 
 --backdrop-color: rgba(0, 0, 0, 0.3);
 
@@ -95,6 +96,9 @@ const GlobalStyles = createGlobalStyle`
   --border-radius-md: 7px;
   --border-radius-lg: 9px;
 
+  --color-red-100: #fee2e2;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
 
 }
 

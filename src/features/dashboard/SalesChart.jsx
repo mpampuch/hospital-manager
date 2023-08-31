@@ -11,7 +11,13 @@ import {
   YAxis,
 } from "recharts";
 import { useDarkMode } from "../../context/DarkModeContext";
-import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
+import {
+  eachDayOfInterval,
+  format,
+  isSameDay,
+  subDays,
+  addDays,
+} from "date-fns";
 
 const StyledSalesChart = styled(DashboardBox)`
   grid-column: 1 / -1;
@@ -34,29 +40,39 @@ function SalesChart({ appointments, numDays }) {
   const data = allDates.map((date) => {
     return {
       label: format(date, "MMM dd"),
-      totalSales: appointments
+      totalCosts: appointments
         .filter((appointment) =>
           isSameDay(date, new Date(appointment.created_at))
         )
         .reduce((acc, cur) => acc + cur.totalPrice, 0),
-      extrasSales: appointments
-        .filter((appointment) =>
-          isSameDay(date, new Date(appointment.created_at))
-        )
-        .reduce((acc, cur) => acc + cur.extrasPrice, 0),
+      Incomes: appointments
+        .filter((appointment) => {
+          const min = 1;
+          const max = 1;
+          // Generate a random number between min and max (inclusive)
+          const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+          const followingDays = addDays(
+            new Date(appointment.created_at),
+            randomNum
+          );
+          return isSameDay(date, new Date(followingDays));
+        })
+        .reduce((acc, cur) => acc + (cur.isPaid ? cur.totalPrice : 0), 0),
     };
   });
 
   const colors = isDarkMode
     ? {
-        totalSales: { stroke: "#4f46e5", fill: "#4f46e5" },
-        extrasSales: { stroke: "#22c55e", fill: "#22c55e" },
+        totalCosts: { stroke: "#b91c1c", fill: "#b91c1c" },
+        Incomes: { stroke: "#22c55e", fill: "#22c55e" },
+
         text: "#e5e7eb",
         background: "#18212f",
       }
     : {
-        totalSales: { stroke: "#4f46e5", fill: "#c7d2fe" },
-        extrasSales: { stroke: "#16a34a", fill: "#dcfce7" },
+        totalCosts: { stroke: "#ff4444", fill: "#ffe8e8" },
+        Incomes: { stroke: "#16a34a", fill: "#dcfce7" },
+
         text: "#374151",
         background: "#fff",
       };
@@ -64,7 +80,7 @@ function SalesChart({ appointments, numDays }) {
   return (
     <StyledSalesChart>
       <Heading as="h2">
-        Sales from {format(allDates.at(0), "MMM dd yyyy")} &mdash;{" "}
+        Cash flows from {format(allDates.at(0), "MMM dd yyyy")} &mdash;{" "}
         {format(allDates.at(-1), "MMM dd yyyy")}{" "}
       </Heading>
 
@@ -83,21 +99,23 @@ function SalesChart({ appointments, numDays }) {
           <CartesianGrid strokeDasharray="4" />
           <Tooltip contentStyle={{ backgroundColor: colors.background }} />
           <Area
-            dataKey="totalSales"
+            dataKey="totalCosts"
             type="monotone"
-            stroke={colors.totalSales.stroke}
-            fill={colors.totalSales.fill}
+            stroke={colors.totalCosts.stroke}
+            fill={colors.totalCosts.fill}
+            fillOpacity={0.5}
             strokeWidth={2}
-            name="Total sales"
+            name="Operating costs"
             unit="$"
           />
           <Area
-            dataKey="extrasSales"
+            dataKey="Incomes"
             type="monotone"
-            stroke={colors.extrasSales.stroke}
-            fill={colors.extrasSales.fill}
+            stroke={colors.Incomes.stroke}
+            fill={colors.Incomes.fill}
+            fillOpacity={0.5}
             strokeWidth={2}
-            name="Extras sales"
+            name="Income"
             unit="$"
           />
         </AreaChart>

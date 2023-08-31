@@ -1,12 +1,20 @@
 import styled from "styled-components";
 import { format, isToday } from "date-fns";
+import { HiPhoneOutgoing, HiOutlineClipboardCheck } from "react-icons/hi";
 import {
   HiOutlineChatBubbleBottomCenterText,
-  HiOutlineCheckCircle,
   HiOutlineCurrencyDollar,
-  HiOutlineHomeModern,
+  HiCalendarDays,
 } from "react-icons/hi2";
+import {
+  MdOutlineWorkHistory,
+  MdOutlinePersonalInjury,
+  MdDomainAdd,
+} from "react-icons/md";
 import { FaMale, FaFemale } from "react-icons/fa";
+
+import { LiaStethoscopeSolid } from "react-icons/lia";
+import { IoMedkitOutline } from "react-icons/io5";
 
 import DataItem from "../../ui/DataItem";
 import { Flag } from "../../ui/Flag";
@@ -78,9 +86,13 @@ const Price = styled.div`
   margin-top: 2.4rem;
 
   background-color: ${(props) =>
-    props.isPaid ? "var(--color-green-100)" : "var(--color-yellow-100)"};
+    props.isPaid || (props.isPaid && props.hasInsurance)
+      ? "var(--color-green-100)"
+      : "var(--color-yellow-100)"};
   color: ${(props) =>
-    props.isPaid ? "var(--color-green-700)" : "var(--color-yellow-700)"};
+    props.isPaid || (props.isPaid && props.hasInsurance)
+      ? "var(--color-green-700)"
+      : "var(--color-yellow-700)"};
 
   & p:last-child {
     text-transform: uppercase;
@@ -103,6 +115,7 @@ const Footer = styled.footer`
 `;
 
 // A purely presentational component
+
 function BookingDataBox({ appointment }) {
   const {
     created_at,
@@ -113,6 +126,7 @@ function BookingDataBox({ appointment }) {
     wardPrice,
     extrasPrice,
     totalPrice,
+    status,
     hasConsultation,
     hasInsurance,
     requiresSpecialEquipment,
@@ -132,25 +146,31 @@ function BookingDataBox({ appointment }) {
       emergencyContact,
     },
     wards: { name: wardName },
+    doctors: { full_name: doctorName },
   } = appointment;
 
   // Define a variable to check if it's paid, or covered by insurance, or payment is outstanding
   let paymentStatus;
 
-  if (isPaid) {
-    paymentStatus = "Paid";
-  } else if (hasInsurance) {
+  if (isPaid && hasInsurance) {
     paymentStatus = "Covered by insurance";
+  } else if (hasInsurance) {
+    paymentStatus = "Insurance claim pending";
+  } else if (isPaid) {
+    paymentStatus = "Billed to patient";
   } else {
     paymentStatus = "Payment outstanding";
   }
+
   return (
     <StyledBookingDataBox>
       <Header>
         <div>
-          <HiOutlineHomeModern />
+          <MdDomainAdd />
           <p>
-            {numNights} nights in Cabin <span>{wardName}</span>
+            {status !== "discharged" ? "Estimated" : ""}
+            {numNights} {numNights === 1 ? "night" : "nights"} in Ward{" "}
+            <span>{wardName}</span>
           </p>
         </div>
 
@@ -181,24 +201,45 @@ function BookingDataBox({ appointment }) {
           <p>Health Insurance Number: {healthInsuranceNumber}</p>
         </Guest>
 
-        {observations && (
-          <DataItem
-            icon={<HiOutlineChatBubbleBottomCenterText />}
-            label="Symptoms:"
-          >
-            {observations}
-          </DataItem>
-        )}
+        <DataItem
+          icon={<HiOutlineChatBubbleBottomCenterText />}
+          label="Symptoms:"
+        >
+          {observations}
+        </DataItem>
+
+        <DataItem icon={<MdOutlineWorkHistory />} label="Medical History:">
+          {medicalHistory}
+        </DataItem>
 
         <DataItem
-          icon={<HiOutlineCheckCircle />}
-          label="Consultation included?"
+          icon={<MdOutlinePersonalInjury />}
+          label="Requires Special Equipment?"
         >
+          {requiresSpecialEquipment ? "Yes" : "No"}
+        </DataItem>
+
+        <DataItem icon={<HiCalendarDays />} label="Consultation Scheduled?">
           {hasConsultation ? "Yes" : "No"}
         </DataItem>
 
-        <DataItem icon={<HiOutlineCheckCircle />} label="Has Insurance?">
+        {hasConsultation && (
+          <DataItem icon={<LiaStethoscopeSolid />} label="Consulting Doctor:">
+            {doctorName}
+          </DataItem>
+        )}
+
+        <DataItem icon={<IoMedkitOutline />} label="Has Insurance?">
           {hasInsurance ? "Yes" : "No"}
+        </DataItem>
+
+        {hasInsurance && (
+          <DataItem icon={<HiOutlineClipboardCheck />} label="Insurance Info:">
+            {insuranceInfo}
+          </DataItem>
+        )}
+        <DataItem icon={<HiPhoneOutgoing />} label="Emergency Contact:">
+          {emergencyContact}
         </DataItem>
 
         <Price isPaid={isPaid}>

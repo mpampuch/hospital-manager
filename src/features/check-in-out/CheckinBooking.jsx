@@ -99,7 +99,8 @@ function CheckinBooking() {
           disabled={confirmPaid || isCheckingIn}
           id="confirm"
         >
-          I confirm that {patients.fullName} has paid the total amount of{" "}
+          I confirm that {patients.fullName} or their insurer will cover the
+          total amount of{" "}
           {!addConsultation
             ? formatCurrency(totalPrice)
             : `${formatCurrency(

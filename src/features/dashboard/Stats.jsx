@@ -32,8 +32,8 @@ function Stats({ appointments, confirmedStays, numDays, wardCount }) {
         value={numAppointments}
       />
       <Stat
-        title="Sales"
-        color="green"
+        title="Costs"
+        color="red"
         icon={<HiOutlineBanknotes />}
         value={formatCurrency(sales)}
       />

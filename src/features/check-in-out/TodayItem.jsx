@@ -5,10 +5,11 @@ import Tag from "../../ui/Tag";
 import { Flag } from "../../ui/Flag";
 import Button from "../../ui/Button";
 import CheckoutButton from "./CheckoutButton";
+import { FaMale, FaFemale } from "react-icons/fa";
 
 const StyledTodayItem = styled.li`
   display: grid;
-  grid-template-columns: 9rem 2rem 1fr 7rem 9rem;
+  grid-template-columns: 9rem 1.2rem 1.2rem 1fr 7rem 9rem;
   gap: 1.2rem;
   align-items: center;
 
@@ -34,6 +35,7 @@ function TodayItem({ activity }) {
       {status === "admitted" && <Tag type="blue">Cleared</Tag>}
 
       <Flag src={patients.countryFlag} alt={`Flag of ${patients.country}`} />
+      {patients.sex === "Male" ? <FaMale /> : <FaFemale />}
       <Guest>{patients.fullName}</Guest>
       <div>{numNights} nights</div>
 
@@ -43,8 +45,6 @@ function TodayItem({ activity }) {
           variation="primary"
           as={Link}
           to={`/checkin/${id}`}
-          // TODO FIX THIS
-          redirect="/"
         >
           Admit
         </Button>

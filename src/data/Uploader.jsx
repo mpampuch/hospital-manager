@@ -19,8 +19,10 @@ import { appointments } from "./data-appointments";
 //   breakfastPrice: 15,
 // };
 
-function randomBoolean() {
-  return Math.random() < 0.5;
+function randomBoolean(cutoff = 0.5) {
+  if (cutoff > 1 || cutoff < 0)
+    throw new Error("Cutoff must be between 0 and 1");
+  return Math.random() < cutoff;
 }
 
 async function deleteGuests() {
@@ -205,34 +207,42 @@ async function createAppointments() {
     .select("id")
     .order("id");
   const allWardIds = wardsIds.map((ward) => ward.id);
-
+  console.log("patientsIds", patientsIds);
+  console.log("doctorsIds", doctorsIds);
+  console.log("wardsIds", wardsIds);
+  console.log("appointments", appointments);
   const finalAppointments = appointments.map((appointment) => {
     // Here relying on the order of wards, as they don't have and ID yet
     const ward = wards.at(appointment.wardId - 1);
+    console.log("ward", ward);
     const numNights = subtractDates(appointment.endDate, appointment.startDate);
     const wardPrice = numNights * ward.dailyCost;
     const numGuests = 0;
     const hasConsultation = randomBoolean();
-    const hasInsurance = randomBoolean();
+
     const requiresSpecialEquipment = randomBoolean();
-    const isPaid = randomBoolean();
     const observations = generateSymptoms();
 
     const extrasPrice = appointment.hasConsultation ? 100 : 0; // hardcoded consultation price
     const totalPrice = wardPrice + extrasPrice;
 
-    // TODO Make sure this is working correctly
     let status;
+    let hasInsurance;
+    let isPaid;
     if (
       isPast(new Date(appointment.endDate)) &&
       !isToday(new Date(appointment.endDate))
     )
       status = "discharged";
+    hasInsurance = randomBoolean(0); // 100% chance of being paid
+    isPaid = randomBoolean(0); // 100% chance of having insurance
     if (
       isFuture(new Date(appointment.startDate)) ||
       isToday(new Date(appointment.startDate))
     )
       status = "scheduled";
+    hasInsurance = randomBoolean(0.5); // 50% chance of being paid
+    isPaid = randomBoolean(0.1); // 10% chance of being paid
     if (
       (isFuture(new Date(appointment.endDate)) ||
         isToday(new Date(appointment.endDate))) &&
@@ -240,6 +250,8 @@ async function createAppointments() {
       !isToday(new Date(appointment.startDate))
     )
       status = "admitted";
+    hasInsurance = randomBoolean(0.5); // 50% chance of being paid
+    isPaid = randomBoolean(0.6); // 60% chance of being paid
 
     return {
       ...appointment,
@@ -259,6 +271,7 @@ async function createAppointments() {
       observations,
     };
   });
+  console.log("finalAppointments", finalAppointments);
 
   const { error } = await supabase
     .from("appointments")

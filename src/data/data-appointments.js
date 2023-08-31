@@ -495,5 +495,84 @@ export const appointments = [
     patientId: 31, // Random patient ID
     doctorId: 17, // Random doctor ID
   },
-  // ... Continue with more appointment objects
+  // APPOINTMENT 25
+  {
+    created_at: fromToday(-90, true),
+    startDate: fromToday(-80),
+    endDate: fromToday(-70),
+    numNights: null,
+    numGuests: null,
+    wardPrice: 0,
+    extrasPrice: 0,
+    totalPrice: 1000,
+    status: "checked-out",
+    hasConsultation: false,
+    hasInsurance: true,
+    requiresSpecialEquipment: false,
+    isPaid: true,
+    observations: "Sample observation text",
+    wardId: 2, // Random ward ID
+    patientId: 32, // Random patient ID
+    doctorId: 25, // Random doctor ID
+  },
+  // APPOINTMENT 26
+  {
+    created_at: fromToday(-80, true),
+    startDate: fromToday(-70),
+    endDate: fromToday(-60),
+    numNights: null,
+    numGuests: null,
+    wardPrice: 0,
+    extrasPrice: 0,
+    totalPrice: 1000,
+    status: "checked-out",
+    hasConsultation: false,
+    hasInsurance: true,
+    requiresSpecialEquipment: false,
+    isPaid: true,
+    observations: "Sample observation text",
+    wardId: 2, // Random ward ID
+    patientId: 33, // Random patient ID
+    doctorId: 26, // Random doctor ID
+  },
+  // APPOINTMENT 27
+  {
+    created_at: fromToday(-60, true),
+    startDate: fromToday(-50),
+    endDate: fromToday(-45),
+    numNights: null,
+    numGuests: null,
+    wardPrice: 0,
+    extrasPrice: 0,
+    totalPrice: 1000,
+    status: "checked-out",
+    hasConsultation: false,
+    hasInsurance: true,
+    requiresSpecialEquipment: false,
+    isPaid: true,
+    observations: "Sample observation text",
+    wardId: 2, // Random ward ID
+    patientId: 34, // Random patient ID
+    doctorId: 27, // Random doctor ID
+  },
+  // APPOINTMENT 28
+  {
+    created_at: fromToday(-60, true),
+    startDate: fromToday(-40),
+    endDate: fromToday(-30),
+    numNights: null,
+    numGuests: null,
+    wardPrice: 0,
+    extrasPrice: 0,
+    totalPrice: 1000,
+    status: "checked-out",
+    hasConsultation: false,
+    hasInsurance: true,
+    requiresSpecialEquipment: false,
+    isPaid: true,
+    observations: "Sample observation text",
+    wardId: 3, // Random ward ID
+    patientId: 35, // Random patient ID
+    doctorId: 28, // Random doctor ID
+  },
 ];

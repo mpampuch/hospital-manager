@@ -39,7 +39,7 @@ export async function getBookings({ filter, sortBy, page }) {
 export async function getBooking(id) {
   const { data, error } = await supabase
     .from("appointments")
-    .select("*, wards(*), patients(*)")
+    .select("*, wards(*), patients(*), doctors(*)")
     .eq("id", id)
     .single();
 
@@ -48,6 +48,7 @@ export async function getBooking(id) {
     throw new Error("Appointment not found");
   }
 
+  console.log(data);
   return data;
 }
 
@@ -56,7 +57,7 @@ export async function getBooking(id) {
 export async function getBookingsAfterDate(date) {
   const { data, error } = await supabase
     .from("appointments")
-    .select("created_at, totalPrice, extrasPrice")
+    .select("created_at, totalPrice, extrasPrice, isPaid")
     .gte("created_at", date)
     .lte("created_at", getToday({ end: true }));
 
@@ -88,7 +89,7 @@ export async function getStaysAfterDate(date) {
 export async function getStaysTodayActivity() {
   const { data, error } = await supabase
     .from("appointments")
-    .select("*, patients(fullName, nationality, countryFlag)")
+    .select("*, patients(fullName, nationality, countryFlag, sex)")
     .or(
       `and(status.eq.scheduled,startDate.eq.${getToday()}),and(status.eq.admitted,endDate.eq.${getToday()})`
     )

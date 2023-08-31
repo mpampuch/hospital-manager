@@ -25,13 +25,19 @@ function DashboardLayout() {
 
   if (isLoading1 || isLoading2 || isLoading3) return <Spinner />;
 
+  let wardCount;
+  if (wards) {
+    // add all maxCapacity values together from all wards
+    wardCount = wards.reduce((acc, cur) => acc + cur.maxCapacity, 0);
+  }
+
   return (
     <StyledDashboardLayout>
       <Stats
         appointments={appointments}
         confirmedStays={confirmedStays}
         numDays={numDays}
-        wardCount={wards.length}
+        wardCount={wardCount}
       />
       <TodayActivity />
       <DurationChart confirmedStays={confirmedStays} />
