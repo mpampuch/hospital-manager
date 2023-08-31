@@ -7,11 +7,16 @@ import { useBookings } from "./useBookings";
 import Spinner from "../../ui/Spinner";
 import Pagination from "../../ui/Pagination";
 import { useRedirect } from "../../context/RedirectContext";
+import { useEffect } from "react";
 
 function BookingTable() {
-  const { appointments, isLoading, count } = useBookings();
   const { updateRedirect } = useRedirect();
-  updateRedirect("/appointments");
+  const { appointments, isLoading, count } = useBookings();
+
+  useEffect(() => {
+    // Call updateRedirect after the component has rendered
+    updateRedirect("/appointments");
+  }, [updateRedirect]);
 
   if (isLoading) return <Spinner />;
 

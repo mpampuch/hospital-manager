@@ -9,7 +9,7 @@ import { FaMale, FaFemale } from "react-icons/fa";
 
 const StyledTodayItem = styled.li`
   display: grid;
-  grid-template-columns: 9rem 1.2rem 1.2rem 1fr 11rem 9rem;
+  grid-template-columns: 9rem 1.2rem 1.2rem 1fr 0.8fr 9rem;
   gap: 1.2rem;
   align-items: center;
 

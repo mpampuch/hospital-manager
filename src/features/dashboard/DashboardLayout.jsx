@@ -8,6 +8,7 @@ import SalesChart from "./SalesChart";
 import DurationChart from "./DurationChart";
 import TodayActivity from "../check-in-out/TodayActivity";
 import { useRedirect } from "../../context/RedirectContext";
+import { useEffect } from "react";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -21,7 +22,10 @@ function DashboardLayout() {
   const { confirmedStays, isLoading: isLoading2, numDays } = useRecentStays();
   const { wards, isLoading: isLoading3 } = useCabins();
   const { updateRedirect } = useRedirect();
-  updateRedirect("/");
+  useEffect(() => {
+    // Call updateRedirect after the component has rendered
+    updateRedirect("/");
+  }, [updateRedirect]);
 
   if (isLoading1 || isLoading2 || isLoading3) return <Spinner />;
 
