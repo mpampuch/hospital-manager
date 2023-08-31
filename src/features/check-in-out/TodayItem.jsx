@@ -9,7 +9,7 @@ import { FaMale, FaFemale } from "react-icons/fa";
 
 const StyledTodayItem = styled.li`
   display: grid;
-  grid-template-columns: 9rem 1.2rem 1.2rem 1fr 7rem 9rem;
+  grid-template-columns: 9rem 1.2rem 1.2rem 1fr 11rem 9rem;
   gap: 1.2rem;
   align-items: center;
 
@@ -37,7 +37,10 @@ function TodayItem({ activity }) {
       <Flag src={patients.countryFlag} alt={`Flag of ${patients.country}`} />
       {patients.sex === "Male" ? <FaMale /> : <FaFemale />}
       <Guest>{patients.fullName}</Guest>
-      <div>{numNights} nights</div>
+      <div>
+        {status === "scheduled" ? "Est. " : ""}
+        {numNights} {numNights === 1 ? "night" : "nights"}
+      </div>
 
       {status === "scheduled" && (
         <Button

@@ -135,7 +135,7 @@ export const appointments = [
   {
     created_at: fromToday(-15, true),
     startDate: fromToday(0),
-    endDate: fromToday(),
+    endDate: fromToday(1),
     numNights: null,
     numGuests: null,
     wardPrice: 0,

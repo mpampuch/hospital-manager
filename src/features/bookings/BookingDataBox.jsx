@@ -168,7 +168,7 @@ function BookingDataBox({ appointment }) {
         <div>
           <MdDomainAdd />
           <p>
-            {status !== "discharged" ? "Estimated" : ""}
+            {status !== "discharged" ? "Estimated " : ""}
             {numNights} {numNights === 1 ? "night" : "nights"} in Ward{" "}
             <span>{wardName}</span>
           </p>
