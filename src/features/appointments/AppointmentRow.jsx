@@ -17,9 +17,9 @@ import ConfirmDelete from "../../ui/ConfirmDelete";
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
 import { useCheckout } from "../check-in-out/useCheckout";
-import { useDeleteBooking } from "./useDeleteBooking";
+import { useDeleteAppointment } from "./useDeleteAppointment";
 
-const Cabin = styled.div`
+const Ward = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--color-grey-600);
@@ -46,7 +46,7 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
-function BookingRow({
+function AppointmentRow({
   appointment: {
     id: appointmentId,
     created_at,
@@ -62,7 +62,7 @@ function BookingRow({
 }) {
   const navigate = useNavigate();
   const { checkout, isCheckingOut } = useCheckout();
-  const { deleteAppointment, isDeleting } = useDeleteBooking();
+  const { deleteAppointment, isDeleting } = useDeleteAppointment();
 
   const statusToTagName = {
     scheduled: "blue",
@@ -72,7 +72,7 @@ function BookingRow({
 
   return (
     <Table.Row>
-      <Cabin>{wardName}</Cabin>
+      <Ward>{wardName}</Ward>
 
       <Stacked>
         <span>{patientName}</span>
@@ -144,4 +144,4 @@ function BookingRow({
   );
 }
 
-export default BookingRow;
+export default AppointmentRow;

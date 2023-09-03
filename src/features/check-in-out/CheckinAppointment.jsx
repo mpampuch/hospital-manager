@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BookingDataBox from "../../features/bookings/BookingDataBox";
+import AppointmentDataBox from "../appointments/AppointmentDataBox";
 
 import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
@@ -9,7 +9,7 @@ import ButtonText from "../../ui/ButtonText";
 import Spinner from "../../ui/Spinner";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
-import { useBooking } from "../bookings/useBooking";
+import { useAppointment } from "../appointments/useAppointment";
 import { useEffect, useState } from "react";
 import Checkbox from "../../ui/Checkbox";
 import { formatCurrency } from "../../utils/helpers";
@@ -25,10 +25,10 @@ const Box = styled.div`
   padding: 2.4rem 4rem;
 `;
 
-function CheckinBooking() {
+function CheckinAppointment() {
   const [confirmPaid, setConfirmPaid] = useState(false);
   const [addConsultation, setAddConsultation] = useState(false);
-  const { appointment, isLoading } = useBooking();
+  const { appointment, isLoading } = useAppointment();
   const { settings, isLoading: isLoadingSettings } = useSettings();
   const { redirectTo } = useRedirect();
   useEffect(() => setConfirmPaid(appointment?.isPaid ?? false), [appointment]);
@@ -75,7 +75,7 @@ function CheckinBooking() {
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
-      <BookingDataBox appointment={appointment} />
+      <AppointmentDataBox appointment={appointment} />
 
       {!hasConsultation && (
         <Box>
@@ -123,4 +123,4 @@ function CheckinBooking() {
   );
 }
 
-export default CheckinBooking;
+export default CheckinAppointment;

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useRecentStays } from "./useRecentStays";
-import { useRecentBookings } from "./useRecentBookings";
+import { useRecentAppointments } from "./useRecentAppointments";
 import Spinner from "../../ui/Spinner";
 import Stats from "./Stats";
-import { useCabins } from "../cabins/useCabins";
+import { useWards } from "../wards/useWards";
 import SalesChart from "./SalesChart";
 import DurationChart from "./DurationChart";
 import TodayActivity from "../check-in-out/TodayActivity";
@@ -18,9 +18,9 @@ const StyledDashboardLayout = styled.div`
 `;
 
 function DashboardLayout() {
-  const { appointments, isLoading: isLoading1 } = useRecentBookings();
+  const { appointments, isLoading: isLoading1 } = useRecentAppointments();
   const { confirmedStays, isLoading: isLoading2, numDays } = useRecentStays();
-  const { wards, isLoading: isLoading3 } = useCabins();
+  const { wards, isLoading: isLoading3 } = useWards();
   const { updateRedirect } = useRedirect();
   useEffect(() => {
     // Call updateRedirect after the component has rendered

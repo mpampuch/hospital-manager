@@ -2,7 +2,7 @@ import SortBy from "../../ui/SortBy";
 import Filter from "../../ui/Filter";
 import TableOperations from "../../ui/TableOperations";
 
-function BookingTableOperations() {
+function AppointmentTableOperations() {
   return (
     <TableOperations>
       <Filter
@@ -30,4 +30,4 @@ function BookingTableOperations() {
   );
 }
 
-export default BookingTableOperations;
+export default AppointmentTableOperations;

@@ -8,7 +8,11 @@ import { useUpdateSetting } from "./useUpdateSetting";
 function UpdateSettingsForm() {
   const {
     isLoading,
-    settings: { minBookingLength, maxBookingLength, consultationPrice } = {},
+    settings: {
+      minAppointmentLength,
+      maxAppointmentLength,
+      consultationPrice,
+    } = {},
   } = useSettings();
   const { isUpdating, updateSetting } = useUpdateSetting();
 
@@ -27,9 +31,9 @@ function UpdateSettingsForm() {
         <Input
           type="number"
           id="min-nights"
-          defaultValue={minBookingLength}
+          defaultValue={minAppointmentLength}
           disabled={isUpdating}
-          onBlur={(e) => handleUpdate(e, "minBookingLength")}
+          onBlur={(e) => handleUpdate(e, "minAppointmentLength")}
         />
       </FormRow>
 
@@ -37,9 +41,9 @@ function UpdateSettingsForm() {
         <Input
           type="number"
           id="max-nights"
-          defaultValue={maxBookingLength}
+          defaultValue={maxAppointmentLength}
           disabled={isUpdating}
-          onBlur={(e) => handleUpdate(e, "maxBookingLength")}
+          onBlur={(e) => handleUpdate(e, "maxAppointmentLength")}
         />
       </FormRow>
 

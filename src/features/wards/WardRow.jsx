@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-import CreateCabinForm from "./CreateCabinForm";
-import { useDeleteCabin } from "./useDeleteCabin";
+import CreateWardForm from "./CreateWardForm";
+import { useDeleteWard } from "./useDeleteWard";
 import { formatCurrency } from "../../utils/helpers";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
-import { useCreateCabin } from "./useCreateCabin";
+import { useCreateWard } from "./useCreateWard";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
@@ -31,7 +31,7 @@ const Img = styled.img`
   transform: scale(1.5) translateX(-3px);
 `;
 
-const Cabin = styled.div`
+const Ward = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--color-grey-600);
@@ -49,9 +49,9 @@ const SpecialEqupmentCost = styled.div`
   color: var(--color-red-700);
 `;
 
-function CabinRow({ ward }) {
-  const { isDeleting, deleteCabin } = useDeleteCabin();
-  const { isCreating, createCabin } = useCreateCabin();
+function WardRow({ ward }) {
+  const { isDeleting, deleteWard } = useDeleteWard();
+  const { isCreating, createWard } = useCreateWard();
 
   const {
     id: wardId,
@@ -64,7 +64,7 @@ function CabinRow({ ward }) {
   } = ward;
 
   function handleDuplicate() {
-    createCabin({
+    createWard({
       name: `Copy of ${name}`,
       maxCapacity,
       dailyCost,
@@ -77,7 +77,7 @@ function CabinRow({ ward }) {
   return (
     <Table.Row>
       <Img src={image} />
-      <Cabin>{name}</Cabin>
+      <Ward>{name}</Ward>
       <div>
         Fits up to {maxCapacity} {maxCapacity === 1 ? "patient" : "patients"}
       </div>
@@ -113,15 +113,15 @@ function CabinRow({ ward }) {
             </Menus.List>
 
             <Modal.Window name="edit">
-              <CreateCabinForm cabinToEdit={ward} />
+              <CreateWardForm wardToEdit={ward} />
             </Modal.Window>
 
             <Modal.Window name="delete">
               <ConfirmDelete
-                resourceName="cabins"
+                resourceName="ward"
                 disabled={isDeleting}
                 onConfirm={() => {
-                  deleteCabin(wardId);
+                  deleteWard(wardId);
                 }}
               />
             </Modal.Window>
@@ -132,4 +132,4 @@ function CabinRow({ ward }) {
   );
 }
 
-export default CabinRow;
+export default WardRow;

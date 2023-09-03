@@ -1,13 +1,13 @@
 import Spinner from "../../ui/Spinner";
-import CabinRow from "./CabinRow";
-import { useCabins } from "./useCabins";
+import WardRow from "./WardRow";
+import { useWards } from "./useWards";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
 import Empty from "../../ui/Empty";
 
-function CabinTable() {
-  const { isLoading, wards } = useCabins();
+function WardTable() {
+  const { isLoading, wards } = useWards();
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
@@ -47,11 +47,11 @@ function CabinTable() {
           // data={wards}
           // data={filteredWards}
           data={sortedWards}
-          render={(ward) => <CabinRow ward={ward} key={ward.id} />}
+          render={(ward) => <WardRow ward={ward} key={ward.id} />}
         />
       </Table>
     </Menus>
   );
 }
 
-export default CabinTable;
+export default WardTable;

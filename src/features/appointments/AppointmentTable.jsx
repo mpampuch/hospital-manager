@@ -1,17 +1,17 @@
-import BookingRow from "./BookingRow";
+import AppointmentRow from "./AppointmentRow";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
 
-import { useBookings } from "./useBookings";
+import { useAppointments } from "./useAppointments";
 import Spinner from "../../ui/Spinner";
 import Pagination from "../../ui/Pagination";
 import { useRedirect } from "../../context/RedirectContext";
 import { useEffect } from "react";
 
-function BookingTable() {
+function AppointmentTable() {
   const { updateRedirect } = useRedirect();
-  const { appointments, isLoading, count } = useBookings();
+  const { appointments, isLoading, count } = useAppointments();
 
   useEffect(() => {
     // Call updateRedirect after the component has rendered
@@ -26,7 +26,7 @@ function BookingTable() {
     <Menus>
       <Table columns="0.6fr 1.8fr 2.2fr 1.2fr 1.6fr 3.2rem">
         <Table.Header>
-          <div>Cabin</div>
+          <div>Ward</div>
           <div>Guest</div>
           <div>Dates</div>
           <div style={{ transform: "translate(1.4rem)" }}>Status</div>
@@ -38,7 +38,7 @@ function BookingTable() {
           data={appointments}
           render={(appointment) => {
             return (
-              <BookingRow key={appointment.id} appointment={appointment} />
+              <AppointmentRow key={appointment.id} appointment={appointment} />
             );
           }}
         />
@@ -51,4 +51,4 @@ function BookingTable() {
   );
 }
 
-export default BookingTable;
+export default AppointmentTable;

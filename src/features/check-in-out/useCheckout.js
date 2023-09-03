@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateBooking } from "../../services/apiBookings";
+import { updateAppointment } from "../../services/apiAppointments";
 import { toast } from "react-hot-toast";
 
 export function useCheckout() {
@@ -7,7 +7,7 @@ export function useCheckout() {
 
   const { mutate: checkout, isLoading: isCheckingOut } = useMutation({
     mutationFn: (appointmentId) =>
-      updateBooking(appointmentId, {
+      updateAppointment(appointmentId, {
         status: "discharged",
       }),
 

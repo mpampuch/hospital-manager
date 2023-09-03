@@ -7,15 +7,15 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 
-import { useCreateCabin } from "./useCreateCabin";
-import { useEditCabin } from "./useEditCabin";
+import { useCreateWard } from "./useCreateWard";
+import { useEditWard } from "./useEditWard";
 
-function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
-  const { isCreating, createCabin } = useCreateCabin();
-  const { isEditing, editCabin } = useEditCabin();
+function CreateWardForm({ wardToEdit = {}, onCloseModal }) {
+  const { isCreating, createWard } = useCreateWard();
+  const { isEditing, editWard } = useEditWard();
   const isWorking = isCreating || isEditing;
 
-  const { id: editId, ...editValues } = cabinToEdit;
+  const { id: editId, ...editValues } = wardToEdit;
   const isEditSession = Boolean(editId);
 
   const { register, handleSubmit, reset, getValues, formState } = useForm({
@@ -27,7 +27,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
     if (isEditSession)
-      editCabin(
+      editWard(
         { newWardData: { ...data, image }, id: editId },
         {
           onSuccess: (data) => {
@@ -37,7 +37,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         }
       );
     else
-      createCabin(
+      createWard(
         { ...data, image: image },
         {
           onSuccess: (data) => {
@@ -155,4 +155,4 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   );
 }
 
-export default CreateCabinForm;
+export default CreateWardForm;

@@ -2,7 +2,7 @@ import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 import { PAGE_SIZE } from "../utils/constants";
 
-export async function getBookings({ filter, sortBy, page }) {
+export async function getAppointments({ filter, sortBy, page }) {
   let query = supabase
     .from("appointments")
     .select(
@@ -36,7 +36,7 @@ export async function getBookings({ filter, sortBy, page }) {
   return { data, count };
 }
 
-export async function getBooking(id) {
+export async function getAppointment(id) {
   const { data, error } = await supabase
     .from("appointments")
     .select("*, wards(*), patients(*), doctors(*)")
@@ -51,9 +51,9 @@ export async function getBooking(id) {
   return data;
 }
 
-// Returns all BOOKINGS that are were created after the given date. Useful to get bookings created in the last 30 days, for example.
+// Returns all appointments that are were created after the given date. Useful to get appointments created in the last 30 days, for example.
 // date: ISOString
-export async function getBookingsAfterDate(date) {
+export async function getAppointmentsAfterDate(date) {
   const { data, error } = await supabase
     .from("appointments")
     .select("created_at, totalPrice, extrasPrice, isPaid")
@@ -94,7 +94,7 @@ export async function getStaysTodayActivity() {
     )
     .order("created_at");
 
-  // Equivalent to this. But by querying this, we only download the data we actually need, otherwise we would need ALL bookings ever created
+  // Equivalent to this. But by querying this, we only download the data we actually need, otherwise we would need ALL Appointments ever created
   // (stay.status === 'unconfirmed' && isToday(new Date(stay.startDate))) ||
   // (stay.status === 'checked-in' && isToday(new Date(stay.endDate)))
 
@@ -106,7 +106,7 @@ export async function getStaysTodayActivity() {
   return data;
 }
 
-export async function updateBooking(id, obj) {
+export async function updateAppointment(id, obj) {
   const { data, error } = await supabase
     .from("appointments")
     .update(obj)
@@ -121,7 +121,7 @@ export async function updateBooking(id, obj) {
   return data;
 }
 
-export async function deleteBooking(id) {
+export async function deleteAppointment(id) {
   // REMEMBER RLS POLICIES
   const { data, error } = await supabase
     .from("appointments")

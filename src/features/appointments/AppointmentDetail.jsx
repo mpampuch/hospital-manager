@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import BookingDataBox from "./BookingDataBox";
+import AppointmentDataBox from "./AppointmentDataBox";
 import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
 import Tag from "../../ui/Tag";
@@ -9,14 +9,14 @@ import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
-import { useBooking } from "./useBooking";
+import { useAppointment } from "./useAppointment";
 import Spinner from "../../ui/Spinner";
 import { useNavigate } from "react-router-dom";
 import { HiArrowUpOnSquare } from "react-icons/hi2";
 import { useCheckout } from "../check-in-out/useCheckout";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import { useDeleteBooking } from "./useDeleteBooking";
+import { useDeleteAppointment } from "./useDeleteAppointment";
 import Empty from "../../ui/Empty";
 
 const HeadingGroup = styled.div`
@@ -25,10 +25,10 @@ const HeadingGroup = styled.div`
   align-items: center;
 `;
 
-function BookingDetail() {
-  const { appointment, isLoading } = useBooking();
+function AppointmentDetail() {
+  const { appointment, isLoading } = useAppointment();
   const { checkout, isCheckingOut } = useCheckout();
-  const { deleteAppointment, isDeleting } = useDeleteBooking();
+  const { deleteAppointment, isDeleting } = useDeleteAppointment();
 
   const moveBack = useMoveBack();
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ function BookingDetail() {
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
-      <BookingDataBox appointment={appointment} />
+      <AppointmentDataBox appointment={appointment} />
 
       <ButtonGroup>
         {status === "scheduled" && (
@@ -99,4 +99,4 @@ function BookingDetail() {
   );
 }
 
-export default BookingDetail;
+export default AppointmentDetail;

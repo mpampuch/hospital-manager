@@ -21,7 +21,7 @@ function Stats({ appointments, confirmedStays, numDays, wardCount }) {
   const occupation =
     confirmedStays.reduce((acc, cur) => acc + cur.numNights, 0) /
     (numDays * wardCount);
-  // num checked in nights / all available nights (num days * num cabins)
+  // num checked in nights / all available nights (num days * num wards)
 
   return (
     <>

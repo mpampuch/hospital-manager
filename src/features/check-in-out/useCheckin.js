@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateBooking } from "../../services/apiBookings";
+import { updateAppointment } from "../../services/apiAppointments";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ export function useCheckin({ redirect }) {
 
   const { mutate: checkin, isLoading: isCheckingIn } = useMutation({
     mutationFn: ({ appointmentId, consultation }) => {
-      return updateBooking(appointmentId, {
+      return updateAppointment(appointmentId, {
         status: "admitted",
         isPaid: true,
         ...consultation,

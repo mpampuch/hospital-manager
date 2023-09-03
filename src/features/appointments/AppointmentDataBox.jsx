@@ -21,7 +21,7 @@ import { Flag } from "../../ui/Flag";
 
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
 
-const StyledBookingDataBox = styled.section`
+const StyledAppointmentDataBox = styled.section`
   /* Box */
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
@@ -116,7 +116,7 @@ const Footer = styled.footer`
 
 // A purely presentational component
 
-function BookingDataBox({ appointment }) {
+function AppointmentDataBox({ appointment }) {
   const {
     created_at,
     startDate,
@@ -163,7 +163,7 @@ function BookingDataBox({ appointment }) {
   }
 
   return (
-    <StyledBookingDataBox>
+    <StyledAppointmentDataBox>
       <Header>
         <div>
           <MdDomainAdd />
@@ -258,8 +258,8 @@ function BookingDataBox({ appointment }) {
       <Footer>
         <p>Scheduled {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
       </Footer>
-    </StyledBookingDataBox>
+    </StyledAppointmentDataBox>
   );
 }
 
-export default BookingDataBox;
+export default AppointmentDataBox;

@@ -70,7 +70,7 @@ function MainNav() {
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/cabins">
+          <StyledNavLink to="/wards">
             <MdDomainAdd />
             <span>Wards</span>
           </StyledNavLink>

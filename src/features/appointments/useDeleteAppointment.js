@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import { deleteBooking as deleteBookingApi } from "../../services/apiBookings";
+import { deleteAppointment as deleteAppointmentApi } from "../../services/apiAppointments";
 
-export function useDeleteBooking() {
+export function useDeleteAppointment() {
   const queryClient = useQueryClient();
 
   const { isLoading: isDeleting, mutate: deleteAppointment } = useMutation({
-    mutationFn: deleteBookingApi,
+    mutationFn: deleteAppointmentApi,
     onSuccess: () => {
       toast.success("Appointment successfully deleted");
 
