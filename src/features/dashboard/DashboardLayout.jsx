@@ -45,9 +45,6 @@ function is24HoursOld(targetDate) {
 function DashboardLayout() {
   const [isLoadingData, setIsLoadingData] = useState(false);
 
-  const { appointments, isLoading: isLoading1 } = useRecentAppointments();
-  const { confirmedStays, isLoading: isLoading2, numDays } = useRecentStays();
-  const { wards, isLoading: isLoading3 } = useWards();
   // Retrieve settings from the API
   const { settings, isLoading: isLoading4 } = useSettings();
   // console.log("settings", settings);
@@ -104,6 +101,10 @@ function DashboardLayout() {
       console.log("The date is less than 24 hours old.");
     }
   }, [settings, updateSetting]);
+
+  const { appointments, isLoading: isLoading1 } = useRecentAppointments();
+  const { confirmedStays, isLoading: isLoading2, numDays } = useRecentStays();
+  const { wards, isLoading: isLoading3 } = useWards();
 
   const { updateRedirect } = useRedirect();
   useEffect(() => {
