@@ -84,10 +84,10 @@ function DashboardLayout() {
     }
 
     if (isOld || isOld === undefined || isOld === null) {
-      // console.log("The date is 24 hours old or older.");
-      // console.log("Resetting");
+      console.log("The date is 24 hours old or older.");
+      console.log("Resetting");
       uploadAll();
-      // console.log("Resetted");
+      console.log("Resetted");
       // console.log("Uploading current reset date to database");
 
       const dateObject = new Date(); // Replace this with your date object
@@ -101,7 +101,7 @@ function DashboardLayout() {
       updateSetting({ dateResetted: dateString });
       // console.log("New date uploaded to database");
     } else {
-      // console.log("The date is less than 24 hours old.");
+      console.log("The date is less than 24 hours old.");
     }
   }, [settings, updateSetting]);
 
