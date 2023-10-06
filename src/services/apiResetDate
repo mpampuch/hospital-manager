@@ -1,0 +1,27 @@
+import supabase from "./supabase";
+
+export async function getResetDate() {
+  const { data, error } = await supabase.from("resetdate").select("*").single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Reset date could not be loaded");
+  }
+  return data;
+}
+
+// We expect a newResetDate object that looks like {resetdate: newValue}
+export async function updateResetDate(newResetDate) {
+  const { data, error } = await supabase
+    .from("resetdate")
+    .update(newResetDate)
+    // There is only ONE row of the reset date database, and it has the ID=1, and so this is the updated one
+    .eq("id", 1)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Reset date could not be updated");
+  }
+  return data;
+}
